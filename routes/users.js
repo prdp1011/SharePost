@@ -119,29 +119,36 @@ router.post('/verifyOtp',function (req,res) {
 
 });
 
-router.post('register',function (req,res) {
+router.post('/register',function (req,res) {
 
 var query={
-    name: req.body.name,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     shopName: req.body.shopName,
     emailId:req.body.emailId,
-    tinNumber:req.body.tinNumber,
-    panNumber:req.body.panNumber,
-    address1:req.body.address1,
-    address2:req.body.address2,
-    category:req.body.category,
+    tinNumber:req.body.tinNo,
+    panNumber:req.body.panNo,
+    address1:req.body.address.name,
+    category:req.body.cat,
     phoneNumber:req.body.phoneNumber ,
     password: req.body.password,
     role: req.body.role,
-    lat: req.body.lat,
-    long: req.body.lang
+    lat: req.body.address.lat,
+    long: req.body.address.long
 }
-Admin.findOne({phoneNumber:query.phoneNumber})
+Admin.findOne({phoneNumber:query.phoneNumber},function (err,resAdmin) {
 
-Admin.create(query,function(err,response){
-    callback(err,response);
+    if(resAdmin){
 
+        app.sendError(req,res,"Phone Number already registered",resAdmin)
+    }else{
+        Admin.create(query,function(err,response){
+            app.send(req,res,response)
+
+        })
+    }
 })
+
 
 
 

@@ -93,9 +93,12 @@ app.factory('authSvc', function($http, $q, $window, apisrv, $rootScope) {
             });
         };
     }
-]).controller('uploadCtrl', [
+]).controller('uploadPro', [
     '$scope', 'authSvc', 'Upload', '$window', 'apisrv', '$timeout', function($scope, authSvc, Upload, $window, apisrv, $timeout) {
         $scope.names = ['pulses', 'Chocolate', 'grocery'];
+        $scope.cats= ["Cat1",'Cat2','Cat3']
+        $scope.selected=''
+        // $scope.selected=$scope.cats[0]
         $scope.submit = function() {
             console.log("running");
             if ($scope.files) {
@@ -107,10 +110,11 @@ app.factory('authSvc', function($http, $q, $window, apisrv, $rootScope) {
         $scope.upload = function(files) {
             console.log("called");
             $scope.data = {
-                userId: authSvc.getUserInfo().id,
-                category: $scope.selectedCategory,
-                price: $scope.price,
-                name: $scope.name,
+                // userId: authSvc.getUserInfo().id,
+                category: $scope.category,
+                subCategory:$scope.subCategory,
+                name: $scope.productName,
+                price:$scope.productPrice,
                 files: files
             };
             Upload.upload({
@@ -259,6 +263,9 @@ app.controller('signupCtrl', ["$scope","$http", function ($scope,$http) {
     $scope.cats= ["Cat1",'Cat2','Cat3']
 
 }])
+
+
+
 app.controller('otpCtrl', ["$scope","$http", "$location", function ($scope,$http,$location ) {
     console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiii")
     $scope.otpflag=false;

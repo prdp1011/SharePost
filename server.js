@@ -46,7 +46,9 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     console.log("database connected")
 });
-
+db.on('reconnected', function () {
+    console.log('MongoDB reconnected!');
+});
 
 
 
@@ -106,6 +108,7 @@ app.post('/upload', function(req, res) {
         if(err) {
            console.log(err);
         }else{
+
             var imgpath=[];
             async.each(req.files,function (m,callback) {
 
@@ -117,23 +120,29 @@ app.post('/upload', function(req, res) {
 
             },function(done){
                 Uploads.findOne({userId:req.body.userId},{},{sort:{productId:-1}},function (err,w) {
-                    if(err)console.log(err)
-                    var productId=w ?w.productId+1:1
-                    console.log(imgpath)
-                    Uploads.create({userId:req.body.userId,productId:productId,path:imgpath,price:req.body.price,category:req.body.category,name:req.body.name},function (err,s) {
-                        if(err)console.log(err)
+                    if(w) {
+                        if (err) console.log(err)
+                        var productId = w ? w.productId + 1 : 1
+                        console.log(imgpath)
+                        Uploads.create({
+                            userId: req.body.userId,
+                            productId: productId,
+                            path: imgpath,
+                            price: req.body.price,
+                            category: req.body.category,
+                            name: req.body.name
+                        }, function (err, s) {
+                            if (err) console.log(err)
 
-                        app.send(req,res,s)
-                        console.log("database uploaded")
-
-                    })
-
+                            app.send(req, res, s)
+                            console.log("database uploaded")
+                        })
+                    }else{
+                        app.sendError(req,res,"user not found",w)
+                    }
                 })
-
             })
-
         }
-
     });
 });
 

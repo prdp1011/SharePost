@@ -10,6 +10,8 @@
 
         <!--================================Styles====================================-->
         <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
         <link href="lib/font-awesome/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="lib/materialize/dist/css/materialize.min.css">
         <link rel="stylesheet" href="styles/main.css">
@@ -21,6 +23,7 @@
         <script type="text/javascript" src="lib/angular-animate/angular-animate.min.js"></script>
         <script type="text/javascript" src="lib/materialize/dist/js/materialize.min.js"></script>
         <script type="text/javascript" src="lib/angular-materialize/src/angular-materialize.js"></script>
+        <script type="text/javascript" src="lib/ng-file-upload/ng-file-upload.min.js"></script>
         <script type="text/javascript" src="lib/angular-route/angular-route.min.js"></script>
         <script src="lib/vsGoogleAutocomplete/dist/vs-google-autocomplete.min.js"></script>
         <script type="text/javascript" src="scripts/app.js"></script>
@@ -47,7 +50,12 @@
     </div>
 </nav>
 <ul class="side-nav" id="nav-mobile">
-    <li class="k"><a href="#/otpAdmin"><i class="fa fa-user-circle" aria-hidden="true"></i>Admin Panel</a></li>
+   <li ><i class="fa fa-user-circle" aria-hidden="true"></i>Admin
+    <ul class="collection">
+        <li class="collection-item"><a href="#/otpAdmin"><i class="fa fa-user-circle " aria-hidden="true"></i>Registeration</a></li>
+        <li class="collection-item"><a href="#/uploadPro"><i class="fa fa-user-circle" aria-hidden="true"></i>Product Upload</a></li>
+    </ul>
+    </li>
 
 </ul>
 
