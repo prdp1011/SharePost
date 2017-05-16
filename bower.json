@@ -1,0 +1,22 @@
+{
+  "name": "ofbuzz",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "ofbuzz"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "website/lib/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-route": "^1.6.4",
+    "vsGoogleAutocomplete": "vs-google-autocomplete#^0.5.0"
+  }
+}

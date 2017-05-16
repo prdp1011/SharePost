@@ -1,0 +1,36 @@
+
+<div class="container" ng-controller="signInCtrl">
+<!-- Modal Trigger -->
+<div href="#demoModal"  modal open="openModal"
+    ready="readyCallback()" complete="completeCallback()">
+</div>
+<!-- Modal Structure -->
+  <form class="form-register" method="post" name="register" ng-submit="submitSignIn()" novalidate >
+<div id="demoModal" class="modal">
+    <div class="modal-content">
+        <h4 class="space-top text-center">Sign - In</h4>
+        <hr>
+<div >
+   <div id="signup" >
+      <div class="signup-screen">
+          
+            <div input-field >
+                  <input id="first-name" type="text"  maxlength="10" class="validate" ng-model="data.userName"  ng-required="true">
+                  <label for="first-name">Mobile No.</label>
+            </div>
+            <div input-field>
+              <input id="last-name" type="password" class="validate" ng-model="data.password"  ng-required="true">
+              <label for="last-name">Password</label>
+             </div>
+               
+        
+       </div>
+    </div>
+</div>
+    </div>
+    <div class="modal-footer" class="space-top text-center">
+        <button  class=" modal-action  waves-effect waves-green btn-flat" type="submit"> Submit</button>
+    </div>
+</div>
+</form>
+</div>
