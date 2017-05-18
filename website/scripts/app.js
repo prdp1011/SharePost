@@ -6,8 +6,8 @@ var app = angular.module('ofBuzz', [
     'ngRoute',
     'ngAnimate',
     'vsGoogleAutocomplete',
-    'ngFileUpload'
-
+    'ngFileUpload',
+    'nvd3'
 ]);
 
 
@@ -56,6 +56,8 @@ blacklist = [];
     templateUrl: 'views/pages/signup.html'
 }).when('/signIn', {
     templateUrl: 'views/pages/signIn.html'
+}).when('/admin', {
+    templateUrl: 'views/pages/admin.html'
 }).when('/uploadPro', {
     templateUrl: 'views/pages/uploadProduct.html'
 }).when('/404', {

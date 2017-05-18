@@ -6,7 +6,7 @@ app.factory('authSvc', function($http, $q, $window, apisrv, $rootScope) {
     var self, setAuthHeader, storage_key;
     self = this;
     self.userinfo = null;
-    storage_key = 'hto-smart-in-ffa-panel-unserinfo';
+    storage_key = 'ofbuzz';
     setAuthHeader = function() {
         return $http.defaults.headers.common['Username'] = self.userinfo.username;
     };
@@ -27,20 +27,25 @@ app.factory('authSvc', function($http, $q, $window, apisrv, $rootScope) {
         if ($window.localStorage[storage_key]) {
             storage = $window.localStorage[storage_key];
             self.userinfo = JSON.parse(storage);
+            $rootScope.signFlag=true
             $rootScope.userinfo = self.userinfo;
             console.log(self.userinfo);
             setAuthHeader();
             return console.log('loading ... userinfo');
+        }else{
+            $rootScope.signFlag=false
+
         }
     };
     self.login = function(username, password) {
         var deferred;
         deferred = $q.defer();
-        $http.get(apisrv.path("/login/?username=" + username + "&password=" + password)).then(function(result) {
+        $http.get("/users/login?username="+username+"&password="+password).then(function(result) {
             console.log(result);
             if (result.data.isError) {
                 return deferred.reject(result.data);
             } else {
+                $rootScope.signFlag=true
                 console.log("api data", result.data);
                 self.onlogin(username, result.data.data);
                 return deferred.resolve(self.userinfo);
@@ -60,24 +65,19 @@ app.factory('authSvc', function($http, $q, $window, apisrv, $rootScope) {
         onlogin: self.onlogin,
         init: self.init
     };
-}).controller('loginCtrl', [
+})
+ app.controller('loginCtrl', [
     '$scope', '$location', 'authSvc', function($scope, $location, authSvc) {
         $scope.msg = 'Please login!';
-        $scope.username = null;
-        $scope.password = null;
+
+        $scope.data={
+            username:null,
+            password:null}
         $scope.islogging = false;
-        return $scope.login = function() {
-            console.log('trying login');
-            if ($scope.username === '') {
-                $scope.msg = 'Please Enter Username!';
-                return;
-            }
-            if ($scope.password === '') {
-                $scope.msg = 'Please Enter Password!';
-                return;
-            }
+        $scope.login = function() {
+            console.log($scope.data)
             $scope.islogging = true;
-            return authSvc.login($scope.username, $scope.password).then(function(obj) {
+            authSvc.login($scope.data.username, $scope.data.password).then(function(obj) {
                 $scope.islogging = false;
                 console.log('login success');
                 console.log(obj);
@@ -90,6 +90,7 @@ app.factory('authSvc', function($http, $q, $window, apisrv, $rootScope) {
                     console.log(err);
                     return $scope.islogging = false;
                 };
+
             });
         };
     }
@@ -198,32 +199,15 @@ app.factory('authSvc', function($http, $q, $window, apisrv, $rootScope) {
             console.log($scope.data);
         };
     }
-]).controller('signInCtrl', ['$scope', function($scope) {
-            console.log("sdfkuhsdljkjmf.ksdljjf;lskdlfkjkj");
-             $scope.data = {}
-            $scope.openModal = false;
-            $scope.load =function(){
-                   $scope.openModal = true;
-            }
-              // $scope.load ();
+])
 
-            $scope.submitSignIn=function(){
+.controller('NavContainerCtrl', ['$scope', function($scope) {}])
+    .controller('navCtrl', [
+    '$scope','$window', '$location', function($scope, $window, $location) {
 
-                    console.log($scope.data);
 
-            }
-            
-               
-}]).controller('NavContainerCtrl', ['$scope', function($scope) {}]).controller('NavCtrl', [
-    '$scope', 'taskStorage', 'filterFilter', '$window', '$location', function($scope, taskStorage, filterFilter, $window, $location) {
-        var tasks;
-        tasks = $scope.tasks = taskStorage.get();
-        $scope.taskRemainingCount = filterFilter(tasks, {
-            completed: false
-        }).length;
-        return $scope.$on('taskRemaining:changed', function(event, count) {
-            return $scope.taskRemainingCount = count;
-        });
+
+
     }
 ])
 
@@ -264,6 +248,18 @@ app.controller('signupCtrl', ["$scope","$http", function ($scope,$http) {
 
 }])
 
+
+app.controller('logoutCtrl',['$scope','$rootScope','$location','$window',function ($scope,$rootScope,$location,$window) {
+
+            $scope.logout=function () {
+                console.log("lofout")
+               window.localStorage.clear();
+                $rootScope.signFlag=false
+                $location.path('/')
+            }
+
+
+}]);
 
 
 app.controller('otpCtrl', ["$scope","$http", "$location", function ($scope,$http,$location ) {
@@ -306,4 +302,109 @@ app.controller('otpCtrl', ["$scope","$http", "$location", function ($scope,$http
     }
 
 
-}])
+}]);
+
+
+app.controller('adminCtrl',['$scope','$rootScope','$http','$window','$location',function ($scope,$rootScope,$http,$window,$location) {
+
+
+$scope.chartFlag=true
+$scope.shopFlag=true
+    $scope.options = {
+        chart: {
+            type: 'multiBarHorizontalChart',
+            height: 450,
+            x: function(d){return d.label;},
+            y: function(d){return d.value;},
+            showControls: true,
+            showValues: true,
+            duration: 500,
+            xAxis: {
+                showMaxMin: false
+            },
+            yAxis: {
+                axisLabel: 'Values',
+                tickFormat: function(d){
+                    return d3.format(',.2f')(d);
+                }
+            }
+
+        },
+        title:{
+            enable:true,
+            text:"All Users Registration chart",
+            className:"H4"
+        }
+    };
+$http.get('/admin/dashboard')
+    .then(function (response) {
+
+        console.log(response.data.data)
+        $scope.data=response.data.data
+        $scope.chartFlag=false
+
+    })
+
+
+    $scope.select={
+        value:null
+    }
+ $http.post('/admin/shopkeeper',{id:0}).then(function (response2) {
+
+     console.log(response2)
+     $scope.select.choices=response2.data.data
+     $scope.shopFlag=false
+
+ })
+$scope.shop={}
+    $scope.loadDetail=function () {
+        $scope.shopFlag=true
+        console.log('loading',{id:$scope.select.value})
+        $http.post('/admin/shopkeeper',{id:$scope.select.value}).then(function (response3) {
+
+            console.log("fetched",response3)
+            $scope.shop=response3.data.data[0]
+            $scope.shopFlag=false
+
+
+
+        })
+
+    }
+
+    $scope.changeApproval=function () {
+
+    console.log($scope.shop.approve)
+
+        if($scope.shop.approve){
+
+        $http.get('/admin/approve?id='+$scope.shop._id+"&approve=1").then(function (resp) {
+
+            console.log(resp.data.data)
+
+        })
+        }else{
+            $http.get('/admin/approve?id='+$scope.shop._id+"&approve=0").then(function (resp) {
+
+                console.log(resp.data.data)
+
+            })
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }])

@@ -9,38 +9,28 @@ var router = express.Router();
 var async=require('async')
 
 router.get('/login', function (req, res) {
-
     console.log(req.query);
-    User.findOne({phoneNumber:req.query.username}).exec(function(err,result){
-
+   Admin.findOne({phoneNumber:req.query.username}).exec(function(err,result){
         if(err) {
             console.log(err);
             app.send(req,res,err)}
-
         if(result) {
-
             console.log(result)
             if (!(result.password === req.query.password)) {
                 app.sendError(req,res,'Wrong user or password');
                 return;
             }
-
             var profile = {
                 firstName: result.name,
                 emailId: result.emailId,
                 phoneNumber: result.phoneNumber,
                 id:result._id
             };
-
             console.log({isError: false, data: profile})
             app.send(req, res, profile)
         }else{
             console.log("user not found");
-
-
             app.sendError(req, res, "user not found")
-
-
         }
 
     })

@@ -31,12 +31,14 @@ Otp = require('./model/Otp');
 //-----------------------------routes----------------------------------
 var Users = require('./routes/users');
 var Custom = require('./routes/custom');
+var admin = require('./routes/admin');
 // ----------------------services-------------------------------------------
 Helper = require('./services/helper');
 
 
 app.use('/users/', Users);
 app.use('/custom', Custom);
+app.use('/admin', admin);
 
 //|_____________________
 

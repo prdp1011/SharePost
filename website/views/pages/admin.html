@@ -1,0 +1,62 @@
+<div class="container" ng-controller="adminCtrl">
+    <div class="row">
+        <div class="col s12">
+            <ul tabs reload="allTabContentLoaded">
+                <li class="tab col s3"><a class="active" href="#test1">DashBoard</a></li>
+                <li class="tab col s3"><a  href="#test2">Shopkeeper</a></li>
+                <li class="tab col s3"><a href="#test3">Consumer</a></li>
+            </ul>
+        </div>
+        <div id="test1" class="col s12" style="margin-top: 5%">
+            <div class="progress" ng-if="chartFlag">
+                <div class="indeterminate"></div>
+            </div>
+            <nvd3 options="options" data="data"></nvd3>
+        </div>
+        <div id="test2" class="col s12" >
+            <div class="progress" ng-if="shopFlag">
+                <div class="indeterminate"></div>
+            </div>
+            <div input-field="">
+                <select class="" ng-model="select.value"  ng-options="value._id as value.shopName for value in select.choices" material-select watch ng-change="loadDetail()">
+                    <!--<option ng-repeat="value._id as valuse.shopName for value in select.choices">{{value}}</option>-->
+                </select>
+                <label>Select Shopkeeper</label>
+            </div>
+            <div class="row" style="width: 40%;margin: auto">
+
+            <div input-field="">
+                <input type="text" ng-model="shop.shopName"  length="150">
+                <label>Shop Name</label>
+            </div>
+            <div input-field="" style="display: inline">
+                <input type="text" ng-model="shop.firstName"  length="150">
+                <label>Shopkeeper Name</label>
+            </div>
+            <div input-field="">
+                <input type="text" ng-model="shop.emailId"  length="150">
+                <label>Email ID</label>
+            </div>
+            <div input-field="">
+                <input type="text" ng-model="shop.phoneNumber"  length="150">
+                <label>Phone Number</label>
+            </div>
+            <div input-field="">
+                <input type="text" ng-model="shop.address1"  length="150">
+                <label>Address</label>
+            </div>
+                <div class="switch">
+                    <label>
+                        Not Approved
+                        <input type="checkbox" ng-model="shop.approve" ng-change="changeApproval()">
+                        <span class="lever"></span>
+                        Approved
+                    </label>
+                </div>
+        </div>
+        </div>
+        <div id="test3" class="col s12">Test 3</div>
+    </div>
+
+
+</div>
