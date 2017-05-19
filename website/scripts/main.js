@@ -351,9 +351,11 @@ $http.get('/admin/dashboard')
     }
  $http.post('/admin/shopkeeper',{id:0}).then(function (response2) {
 
-     console.log(response2)
-     $scope.select.choices=response2.data.data
+     console.log("=============",response2)
+     $scope.select.choices=response2.data.data;
+     $scope.select.value=$scope.select.choices[0]._id;
      $scope.shopFlag=false
+     $scope.loadDetail();
 
  })
 $scope.shop={}
@@ -363,7 +365,7 @@ $scope.shop={}
         $http.post('/admin/shopkeeper',{id:$scope.select.value}).then(function (response3) {
 
             console.log("fetched",response3)
-            $scope.shop=response3.data.data[0
+            $scope.shop=response3.data.data[0];
             if(response3.data.data[0].approved==1){
                 $scope.shop.approve=true
             }else{

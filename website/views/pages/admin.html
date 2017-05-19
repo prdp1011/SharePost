@@ -1,10 +1,12 @@
-<div class="container" ng-controller="adminCtrl">
+<div  ng-controller="adminCtrl">
+<div class="container">
     <div class="row">
         <div class="col s12">
             <ul tabs reload="allTabContentLoaded">
                 <li class="tab col s3"><a class="active" href="#test1">DashBoard</a></li>
                 <li class="tab col s3"><a  href="#test2">Shopkeeper</a></li>
                 <li class="tab col s3"><a href="#test3">Consumer</a></li>
+<!--                <li class="tab col s3"><a href="#test1">Consumer1</a></li>-->
             </ul>
         </div>
         <div id="test1" class="col s12" style="margin-top: 5%">
@@ -13,17 +15,68 @@
             </div>
             <nvd3 options="options" data="data"></nvd3>
         </div>
-        <div id="test2" class="col s12" >
-            <div class="progress" ng-if="shopFlag">
+        
+        <div id="test3" class="col s12">Test 3</div>
+    </div>
+</div>
+
+
+
+<div class="row">
+<div id="test2" class="card col s10 offset-s1" style="">
+
+ <div class="progress row" ng-if="shopFlag">
                 <div class="indeterminate"></div>
             </div>
-            <div input-field="">
-                <select class="" ng-model="select.value"  ng-options="value._id as value.shopName for value in select.choices" material-select watch ng-change="loadDetail()">
+            <div  class= "col s12" input-field="" >
+                <h6 class="col s4 offset-s2" style="text-align: center">Select Shopkeeper</h6>
+                <span class="col s4"  style="margin-left: -7%;margin-top: -1%;">
+                <select  style="margin-top: -5%" ng-model="select.value"  ng-options="value._id as value.shopName for value in select.choices" material-select watch ng-change="loadDetail()">
                     <!--<option ng-repeat="value._id as valuse.shopName for value in select.choices">{{value}}</option>-->
-                </select>
-                <label>Select Shopkeeper</label>
+                </select></span>
+                
             </div>
-            <div class="row" style="width: 40%;margin: auto">
+            <div class = "row"></div>
+                <div class="card-image waves-effect waves-block waves-light" >
+                    <img class="" src="http://res.cloudinary.com/dh5gx0t5p/image/upload/v1495188266/user-profile-bg_hbub9d.jpg" alt="user background" width="" height="233px">                    
+              
+                     </div>
+                 <figure class="card-profile-image" style="position: absolute; margin-top: 21%">
+                    <img src="http://res.cloudinary.com/dh5gx0t5p/image/upload/v1495188263/avatar_oiu9ev.jpg" alt="profile image" class="circle z-depth-2 responsive-img">
+                </figure>
+                
+                <div class="card-content">
+                  <div class="row">                    
+                    <div class="col s2 offset-s2 center-align">                        
+                        <h4 class="card-title grey-text text-darken-4">{{shop.firstName}}</h4>
+                        <p class="medium-small grey-text">Name</p>                        
+                    </div>
+                    <div class="col s2 center-align">
+                        <h4 class="card-title grey-text text-darken-4">{{shop.phoneNumber}}</h4>
+                        <p class="medium-small grey-text">Phone Number</p>                        
+                    </div>
+                    <div class="col s2 center-align">
+                        <h4 class="card-title grey-text text-darken-4">{{shop.emailId}}</h4>
+                        <p class="medium-small grey-text">Email ID</p>                        
+                    </div>                    
+                    <div class="col s2 center-align">
+                        <h4 class="card-title grey-text text-darken-4"><span ng-if="shop.approve==true">Approved</span>
+                        <span ng-if="shop.approve==false">Not Approved</span></h4>
+                        <p class="medium-small grey-text">Status</p>                        
+                    </div>
+                    <div class="col s1 right-align" style="margin-top: -4%">
+                      <a class="btn-floating activator waves-effect waves-light darken-2 right">
+                          <i class="fa fa-pencil-square-o"></i>
+                      </a>
+                    </div>                    
+                   
+                  </div>
+                </div>
+                <div class="card-reveal" style="display: none; transform: translateY(0px);">
+                    <p>
+                      <span class="card-title grey-text text-darken-4"> <i class="fa fa-times" style="float:right"></i></span>
+                    </p>
+<div class="row" style="width: 40%;margin: auto">
 
             <div input-field="">
                 <input type="text" ng-model="shop.shopName"  length="150">
@@ -54,9 +107,11 @@
                     </label>
                 </div>
         </div>
-        </div>
-        <div id="test3" class="col s12">Test 3</div>
-    </div>
+        
+                </div>
+            </div>
 
 
+  </div>
 </div>
+  <style> .card-image { position:absolute;  } .card-profile-image { position:absolute; top: 25px; left: 25px; z-index: 2; } </style>
