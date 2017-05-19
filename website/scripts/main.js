@@ -402,7 +402,11 @@ $scope.shop={}
     }
 
 
+    $scope.updateProfile=function(){
 
+            console.log("done update",  $scope.shop)
+
+    }
 
 
 

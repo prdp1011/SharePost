@@ -95,7 +95,8 @@
                 <label>Phone Number</label>
             </div>
             <div input-field="">
-                <input type="text" ng-model="shop.address1"  length="150">
+                <input type="text" ng-model="shop.address1" vs-google-autocomplete vs-latitude="shop.address.lat"
+                         vs-longitude="shop.address.long" id="add-name" type="text" class="validate"  length="150">
                 <label>Address</label>
             </div>
                 <div class="switch">
@@ -106,6 +107,9 @@
                         Approved
                     </label>
                 </div>
+                 <div input-field="" >
+
+                <button class="waves-effect waves-light btn" ng-click="updateProfile()">Submit</button></div>
         </div>
         </div>
                 </div>
