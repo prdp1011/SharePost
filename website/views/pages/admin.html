@@ -15,8 +15,7 @@
             </div>
             <nvd3 options="options" data="data"></nvd3>
         </div>
-        
-        <div id="test3" class="col s12">Test 3</div>
+       
     </div>
 </div>
 
@@ -29,8 +28,8 @@
                 <div class="indeterminate"></div>
             </div>
             <div  class= "col s12" input-field="" >
-                <h6 class="col s4 offset-s2" style="text-align: center">Select Shopkeeper</h6>
-                <span class="col s4"  style="margin-left: -7%;margin-top: -1%;">
+                <h6 class="col s12 l4 offset-l2" style="text-align: center">Select Shopkeeper</h6>
+                <span class="col s12 l4"  style="margin-left: -7%;margin-top: -1%;">
                 <select  style="margin-top: -5%" ng-model="select.value"  ng-options="value._id as value.shopName for value in select.choices" material-select watch ng-change="loadDetail()">
                     <!--<option ng-repeat="value._id as valuse.shopName for value in select.choices">{{value}}</option>-->
                 </select></span>
@@ -47,24 +46,24 @@
                 
                 <div class="card-content">
                   <div class="row">                    
-                    <div class="col s2 offset-s2 center-align">                        
+                    <div class="col l2 s12 offset-l2  center-align">                        
                         <h4 class="card-title grey-text text-darken-4">{{shop.firstName}}</h4>
                         <p class="medium-small grey-text">Name</p>                        
                     </div>
-                    <div class="col s2 center-align">
+                    <div class="col l2 s12 center-align">
                         <h4 class="card-title grey-text text-darken-4">{{shop.phoneNumber}}</h4>
                         <p class="medium-small grey-text">Phone Number</p>                        
                     </div>
-                    <div class="col s2 center-align">
+                    <div class="col l2 s12 center-align">
                         <h4 class="card-title grey-text text-darken-4">{{shop.emailId}}</h4>
                         <p class="medium-small grey-text">Email ID</p>                        
                     </div>                    
-                    <div class="col s2 center-align">
+                    <div class="col l3 s12 center-align">
                         <h4 class="card-title grey-text text-darken-4"><span ng-if="shop.approve==true">Approved</span>
                         <span ng-if="shop.approve==false">Not Approved</span></h4>
                         <p class="medium-small grey-text">Status</p>                        
                     </div>
-                    <div class="col s1 right-align" style="margin-top: -4%">
+                    <div class="col s1 l1 offset-s11 right-align" style="margin-top: -4%">
                       <a class="btn-floating activator waves-effect waves-light darken-2 right">
                           <i class="fa fa-pencil-square-o"></i>
                       </a>
@@ -86,7 +85,7 @@
                 <input type="text" ng-model="shop.firstName"  length="150">
                 <label>Shopkeeper Name</label>
             </div>
-            <div input-field="">
+            <div input-field="" >
                 <input type="text" ng-model="shop.emailId"  length="150">
                 <label>Email ID</label>
             </div>
@@ -114,4 +113,8 @@
 
   </div>
 </div>
+ 
+        <div id="test3" class="col s12">Test 3</div>
+
+
   <style> .card-image { position:absolute;  } .card-profile-image { position:absolute; top: 25px; left: 25px; z-index: 2; } </style>
