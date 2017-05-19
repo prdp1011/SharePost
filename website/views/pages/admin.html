@@ -29,7 +29,7 @@
             </div>
             <div  class= "col s12" input-field="" >
                 <h6 class="col s12 l4 offset-l2" style="text-align: center">Select Shopkeeper</h6>
-                <span class="col s12 l4"  style="margin-left: -7%;margin-top: -1%;">
+                <span class="col s12 l4"  style="margin-left: 0%;margin-top: -1%;">
                 <select  style="margin-top: -5%" ng-model="select.value"  ng-options="value._id as value.shopName for value in select.choices" material-select watch ng-change="loadDetail()">
                     <!--<option ng-repeat="value._id as valuse.shopName for value in select.choices">{{value}}</option>-->
                 </select></span>
@@ -65,7 +65,8 @@
                     </div>
                     <div class="col s1 l1 offset-s11 right-align" style="margin-top: -4%">
                       <a class="btn-floating activator waves-effect waves-light darken-2 right">
-                          <i class="fa fa-pencil-square-o"></i>
+                          <!-- <i class="fa fa-pencil-square-o"></i> -->
+                          <i class="material-icons">edit</i>
                       </a>
                     </div>                    
                    
@@ -75,8 +76,8 @@
                     <p>
                       <span class="card-title grey-text text-darken-4"> <i class="fa fa-times" style="float:right"></i></span>
                     </p>
-<div class="row" style="width: 40%;margin: auto">
-
+<div class="row">
+<div class="col l6 s12 offset-l3">
             <div input-field="">
                 <input type="text" ng-model="shop.shopName"  length="150">
                 <label>Shop Name</label>
@@ -106,7 +107,7 @@
                     </label>
                 </div>
         </div>
-        
+        </div>
                 </div>
             </div>
 
