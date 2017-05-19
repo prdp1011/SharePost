@@ -363,7 +363,13 @@ $scope.shop={}
         $http.post('/admin/shopkeeper',{id:$scope.select.value}).then(function (response3) {
 
             console.log("fetched",response3)
-            $scope.shop=response3.data.data[0]
+            $scope.shop=response3.data.data[0
+            if(response3.data.data[0].approved==1){
+                $scope.shop.approve=true
+            }else{
+                $scope.shop.approve=false
+
+            }
             $scope.shopFlag=false
 
 
