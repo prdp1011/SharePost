@@ -60,6 +60,8 @@ blacklist = [];
     templateUrl: 'views/pages/admin.html'
 }).when('/uploadPro', {
     templateUrl: 'views/pages/uploadProduct.html'
+}).when('/profile', {
+    templateUrl: 'views/pages/profile.html'
 }).when('/404', {
     templateUrl: 'views/pages/404.html'
 }).otherwise({

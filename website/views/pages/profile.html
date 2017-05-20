@@ -1,0 +1,68 @@
+
+<div class="row" ng-controller="profileCtrl" style="width: 98%;">
+<div class="card">
+					<div class="card-image waves-effect waves-block waves-light" >
+	                    <img class="" src="http://res.cloudinary.com/dh5gx0t5p/image/upload/v1495188266/user-profile-bg_hbub9d.jpg" alt="user background" width="" height="233px">                    
+	              
+                     </div>
+                 <figure class="card-profile-image" style="position: absolute; margin-top: 10%" data-activates='demoDropdown' dropdown>
+                    <img src="http://res.cloudinary.com/dh5gx0t5p/image/upload/v1495188263/avatar_oiu9ev.jpg" alt="profile image" class="circle z-depth-2 responsive-img">
+                </figure>
+                <ul id='demoDropdown' class='dropdown-content' style="margin-top: 20% ; margin-left: 4%">
+                    <li><a href="javascript:void(0);" >View Photo</a></li>
+                    <li><a href="javascript:void(0);">Upload Photo</a></li>
+                    <li><a href="javascript:void(0);">Remove Photo</a></li>
+                </ul>
+        <div class="card-content">
+	          <div class="row">                    
+	            <div class="col l2 s12 offset-l2  center-align">                        
+	                <h4 class="card-title grey-text text-darken-4">{{shop.firstName}}</h4>
+	                <p class="medium-small grey-text">Name</p>                        
+	            </div>
+	            <div class="col l2 s12 center-align">
+	                <h4 class="card-title grey-text text-darken-4">{{shop.phoneNumber}}</h4>
+	                <p class="medium-small grey-text">Phone Number</p>                        
+	            </div>
+	            <div class="col l2 s12 push-s2 center-align">
+	                <h4 class="card-title grey-text text-darken-4">{{shop.emailId}}</h4>
+	                <p class="medium-small grey-text">Email ID</p>                       
+	            </div>                    
+	            <div class="col l2 s12 pull-s2 center-align">
+	            <span class="flow-text">
+	            	<h4 class="card-title grey-text text-darken-4">{{shop.address1}}</h4></span> 
+	                <p class="medium-small grey-text">Address</p>                       
+	            </div>
+	            <div class="col l2 push-l2 center-align"></div>
+	          </div>
+          </div>
+
+</div>
+<div class="progress row" ng-if="shopFlag">
+                <div class="indeterminate"></div>
+            </div>
+<div class="row">
+<div >
+	<div class="col s12">
+		<div class="card">
+			<div class="card-image" ng-repeat="i in profileData.pImages">
+			<div class="col s12  l4">
+			 <div class="col s1 l1 offset-s11" style="margin-left: 97%;     margin-bottom: -6%;" >
+                      <a class="btn-floating activator waves-effect waves-light darken-2 right red" ng-click="removePhoto(i.url)">
+                          <i class="material-icons">close</i>
+                      </a>
+                    </div> 
+          		<img ng-src={{i.url}} style=" height: 215px;">
+          		</div>
+        </div>
+        <div class="card-content">
+           <span class="card-title">{{profileData.title}}</span>
+          <p>{{profileData.pdata}}</p>
+        </div>
+		
+		</div>
+	</div>
+</div>
+</div>
+</div>
+ <style> .card-image { position:absolute;  } .card-profile-image { position:absolute; top: 25px; left: 25px; z-index: 2; } </style>
+

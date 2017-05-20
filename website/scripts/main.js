@@ -408,15 +408,35 @@ $scope.shop={}
 
     }
 
-     
+}])
+
+app.controller('profileCtrl',['$scope','$rootScope','$http','$window','$location','Upload','$timeout','apisrv',function ($scope,$rootScope,$http,$window,$location,Upload,$timeout,apisrv) {
+$scope.shop= {'firstName':'Allll', 'phoneNumber':'23213123', 'emailId':'sdkh@kjcv', 'address1':'delhi'}
+$scope.profileData = 
+ {
+    'title': 'Sam',
+    'pdata': 'I am a very simple. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.',
+    'pImages': [{
+        'url': 'http://res.cloudinary.com/dh5gx0t5p/image/upload/v1495188263/avatar_oiu9ev.jpg'
+    }, {
+        'url': 'http://res.cloudinary.com/dh5gx0t5p/image/upload/v1495188266/user-profile-bg_hbub9d.jpg'
+    }, {
+        'url': 'http://res.cloudinary.com/dh5gx0t5p/image/upload/v1493558738/sample.jpg'
+    }]
+ }
+
+ $scope.removePhoto=function(url){
+        $scope.shopFlag=true
+        console.log(url)
+        $timeout(function() {
+                $scope.shopFlag=false
+
+        }, 1000);
+        
 
 
+ }
+console.log("asdkhasl")
 
 
-
-
-
-
-
-
-        }])
+}])
