@@ -305,7 +305,7 @@ app.controller('otpCtrl', ["$scope","$http", "$location", function ($scope,$http
 }]);
 
 
-app.controller('adminCtrl',['$scope','$rootScope','$http','$window','$location',function ($scope,$rootScope,$http,$window,$location) {
+app.controller('adminCtrl',['$scope','$rootScope','$http','$window','$location','Upload','$timeout','apisrv',function ($scope,$rootScope,$http,$window,$location,Upload,$timeout,apisrv) {
 
 
 $scope.chartFlag=true
@@ -408,7 +408,7 @@ $scope.shop={}
 
     }
 
-
+     
 
 
 
