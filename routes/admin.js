@@ -29,13 +29,8 @@ router.get('/dashboard',function (req,res) {
             "color":"#D62728",
             "values":data
         }
-        var sendData2={
-            "key":"Consumer",
-            "color":"#FF8C26",
-
-            "values":data
-        }
-        app.send(req,res,[sendData,sendData2])
+        
+        app.send(req,res,[sendData])
 
     })
 
