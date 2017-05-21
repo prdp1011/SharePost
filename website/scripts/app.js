@@ -16,37 +16,74 @@ app.config([
 
 $locationProvider.html5Mode(false).hashPrefix('');
 routes = [];
-blacklist = [];
+blacklist = ['pages/admin'];
 
-// var setRoutes = function(route) {
-//     var config, url;
-//     url = '/' + route;
-//     config = {
-//         templateUrl: 'views/' + route + '.html',
-//         resolve: {
-//             auth: [
-//                 '$q', 'authSvc', '$rootScope', function($q, authSvc, $rootScope) {
-//                     var pinfo, role, userinfo, _i, _len, _ref;
-//                     userinfo = authSvc.getUserInfo();
-//                     $rootScope.userinfo = userinfo;
-//                     console.log('validating authentication.');
-//                     if (userinfo) {
-//                       return $q.when(userinfo);
-//                     } else {
-//                         return $q.reject({
-//                             authenticated: false
-//                         });
-//                     }
-//                 }
-//             ]
-//         }
-//     };
-//     $routeProvider.when(url, config);
-//     return $routeProvider;
-// };
-// routes.forEach(function(route) {
-//     return setRoutes(route);
-// });
+ setRoutes1 = function(route) {
+    var config, url;
+    url = '/' + route;
+    config = {
+        templateUrl: 'views/' + route + '.html',
+        resolve: {
+            auth: [
+                '$q', 'authSvc', '$rootScope', function($q, authSvc, $rootScope) {
+                    var pinfo, role, userinfo, _i, _len, _ref;
+                    userinfo = authSvc.getUserInfo();
+                    $rootScope.userinfo = userinfo;
+                    console.log('validating authentication.');
+
+                    if(userinfo){
+                      return $q.when(userinfo);
+                    }else {
+                        return $q.reject({
+                            authenticated: false
+                        });
+                    }
+                }
+            ]
+        }
+    };
+    $routeProvider.when(url, config);
+    return $routeProvider;
+};
+ setRoutes2 = function(route) {
+    var config, url;
+    url = '/' + route;
+    config = {
+        templateUrl: 'views/' + route + '.html',
+        resolve: {
+            auth: [
+                '$q', 'authSvc', '$rootScope', function($q, authSvc, $rootScope) {
+                    var pinfo, role, userinfo, _i, _len, _ref;
+                    userinfo = authSvc.getUserInfo();
+                    $rootScope.userinfo = userinfo;
+                    console.log('validating authentication.');
+
+                    if(userinfo){
+                    if (userinfo.role==1) {
+                      return $q.when(userinfo);
+                    }else{
+                        return $q.reject({
+                            authenticated: false
+                        });
+                    }
+                    }else {
+                        return $q.reject({
+                            authenticated: false
+                        });
+                    }
+                }
+            ]
+        }
+    };
+    $routeProvider.when(url, config);
+    return $routeProvider;
+};
+routes.forEach(function(route) {
+    return setRoutes1(route);
+});
+blacklist.forEach(function(route) {
+    return setRoutes2(route);
+});
 
 
  $routeProvider.when('/',{templateUrl:'views/pages/home.html'})
@@ -54,10 +91,10 @@ blacklist = [];
     templateUrl: 'views/pages/otp.html'
 }).when('/signupAdmin', {
     templateUrl: 'views/pages/signup.html'
+}).when('/pages/eprofile/:id', {
+    templateUrl: 'views/pages/aeditProfile.html'
 }).when('/signIn', {
     templateUrl: 'views/pages/signIn.html'
-}).when('/admin', {
-    templateUrl: 'views/pages/admin.html'
 }).when('/uploadPro', {
     templateUrl: 'views/pages/uploadProduct.html'
 }).when('/profile', {

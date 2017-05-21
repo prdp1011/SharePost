@@ -25,13 +25,15 @@ cloudinary.config({
 
 //---------------------------models------------------------------------
 Admin = require('./model/Users');
-Uploads = require('./model/uploads');
+Product = require('./model/products');
 Otp = require('./model/Otp');
+Category = require('./model/categories');
 
 //-----------------------------routes----------------------------------
 var Users = require('./routes/users');
 var Custom = require('./routes/custom');
 var admin = require('./routes/admin');
+var shopkeeper = require('./routes/shopkeeper');
 // ----------------------services-------------------------------------------
 Helper = require('./services/helper');
 
@@ -39,6 +41,7 @@ Helper = require('./services/helper');
 app.use('/users/', Users);
 app.use('/custom', Custom);
 app.use('/admin', admin);
+app.use('/shopkeeper', shopkeeper);
 
 //|_____________________
 
@@ -111,41 +114,51 @@ app.post('/upload', function(req, res) {
            console.log(err);
         }else{
 
-            var imgpath=[];
-            async.each(req.files,function (m,callback) {
 
-                cloudinary.uploader.upload(m.path, function(result) {
-                    // console.log(result)
-                    imgpath.push(result.url);
-                    callback()
-                })
+ Admin.findOne({_id:req.body.userId},function (err,result) {
 
-            },function(done){
-                Uploads.findOne({userId:req.body.userId},{},{sort:{productId:-1}},function (err,w) {
-                    if(w) {
-                        if (err) console.log(err)
-                        var productId = w ? w.productId + 1 : 1
-                        console.log(imgpath)
-                        Uploads.create({
-                            userId: req.body.userId,
-                            productId: productId,
-                            path: imgpath,
-                            price: req.body.price,
-                            category: req.body.category,
-                            name: req.body.name
-                        }, function (err, s) {
-                            if (err) console.log(err)
+     if(result){
+         var imgpath=[];
+         async.each(req.files,function (m,callback) {
 
-                            app.send(req, res, s)
-                            console.log("database uploaded")
-                        })
-                    }else{
-                        app.sendError(req,res,"user not found",w)
-                    }
-                })
-            })
-        }
-    });
+             cloudinary.uploader.upload(m.path, function(result) {
+                 // console.log(result)
+                 imgpath.push(result.url);
+                 callback()
+             })
+
+         },function(done){
+             Product.findOne({userId:req.body.userId},{},{sort:{productId:-1}},function (err,w) {
+                     if (err) console.log(err)
+                     var productId = w ? w.productId + 1 : 1
+                     console.log(imgpath)
+                     Product.create({
+                         userId: req.body.userId,
+                         productId: productId,
+                         path: imgpath,
+                         price: req.body.price,
+                         category: req.body.category,
+                         name: req.body.name
+                     }, function (err, s) {
+                         if (err) console.log(err)
+
+                         app.send(req, res, s)
+                         console.log("database uploaded")
+                     })
+
+             })
+         })
+     }else{
+
+         app.sendError(req,res,"no id found",err)
+     }
+ });
+
+     }
+
+ })
+
+
 });
 
 
@@ -190,7 +203,10 @@ app.get('/sendSms',function(req,res){
 
 
 
+process.on('uncaughtException', function (err) {
 
+    console.log(err)
+});
 
 
 

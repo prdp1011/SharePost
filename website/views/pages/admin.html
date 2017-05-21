@@ -6,6 +6,7 @@
                 <li class="tab col s3"><a class="active" href="#test1">DashBoard</a></li>
                 <li class="tab col s3"><a  href="#test2">Shopkeeper</a></li>
                 <li class="tab col s3"><a href="#test3">Consumer</a></li>
+                <li class="tab col s3"><a href="#test4">Edit</a></li>
 <!--                <li class="tab col s3"><a href="#test1">Consumer1</a></li>-->
             </ul>
         </div>
@@ -65,10 +66,12 @@
                         <h4 class="card-title grey-text text-darken-4">{{shop.emailId}}</h4>
                         <p class="medium-small grey-text">Email ID</p>                        
                     </div>                    
-                    <div class="col l3 s12 center-align">
+                    <div class="col l2 s12 center-align">
                         <h4 class="card-title grey-text text-darken-4"><span ng-if="shop.approve==true">Approved</span>
                         <span ng-if="shop.approve==false">Not Approved</span></h4>
                         <p class="medium-small grey-text">Status</p>                        
+                    </div> <div class="col l2 s12 center-align">
+                        <h4><a class="btn" href="#/pages/eprofile/{{shop._id}}">View Profile</a></h4>
                     </div>
                     <div class="col s1 l1 offset-s11 right-align" style="margin-top: -4%">
                       <a class="btn-floating activator waves-effect waves-light darken-2 right">
@@ -115,7 +118,6 @@
                     </label>
                 </div>
                  <div input-field="" >
-
                 <button class="waves-effect waves-light btn" ng-click="updateProfile()">Submit</button></div>
         </div>
         </div>
@@ -124,9 +126,43 @@
 
 
   </div>
+    <div id="test3" class="col s12">Test 3</div>
+    <div id="test4" class="col s12">
+        <div class="row col s12 l12">
+            <div class="row col s12 l12">
+                <div class="col s12 l6"><p>Category</p></div>
+                <div class="col s12 l6"><p>Sub Category</p></div>
+            </div>
+           <div class="col s12 l6">
+               <p ng-repeat="n in cat.cat track by $index">{{n}}</p>
+           </div>
+           <div class="col s12 l6">
+               <p ng-repeat="m in cat.subcat track by $index">{{m}}</p>
+           </div>
+        </div>
+        <div class="row col s12 l12">
+            <div class="switch">
+                <label>
+                    Categoty
+                    <input ng-init="add.switch=false" type="checkbox" ng-model="add.switch">
+                    <span class="lever"></span>
+                    Sub Category
+                </label>
+            </div>
+        </div>
+        <div class="row col s12 l12">
+            <div input-field="" class="col s12 l6">
+                <input type="text" ng-model="add.inputCat" length="150">
+                <label>Input label</label>
+            </div>
+            <div input-field="" class="col s12 l6">
+                <button  class="btn" type="button" ng-click="addNew()">add</button>
+            </div>
+        </div>
+    </div>
 </div>
  
-        <div id="test3" class="col s12">Test 3</div>
+
 
 
   <style> .card-image { position:absolute;  } .card-profile-image { position:absolute; top: 25px; left: 25px; z-index: 2; } </style>

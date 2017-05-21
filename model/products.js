@@ -8,18 +8,20 @@ var ObjectId = mongoose.Types.ObjectId;
 var async=require('async')
 
 // create a schema
-var uploadSchema = new Schema({
+var productSchema = new Schema({
     userId:{type:mongoose.Schema.Types.ObjectId},
     productId:'Number',
     category:'String',
     price:'String',
     name:'String',
-    path:[]
+    path:[],
+    updatedAt:'Date',
+    createdAt:'Date'
 });
 
 
 
-uploadSchema.pre('save', function(next) {
+productSchema.pre('save', function(next) {
     // get the current date
     var currentDate = new Date();
     // change the updated_at field to current date
@@ -33,7 +35,7 @@ uploadSchema.pre('save', function(next) {
 });
 
 
-var Upload = mongoose.model('Upload', uploadSchema);
+var Product = mongoose.model('Product', productSchema);
 
 // make this available to our users in our Node applications
-module.exports = Upload;
+module.exports = Product;

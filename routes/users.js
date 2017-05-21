@@ -13,7 +13,7 @@ router.get('/login', function (req, res) {
    Admin.findOne({phoneNumber:req.query.username}).exec(function(err,result){
         if(err) {
             console.log(err);
-            app.send(req,res,err)}
+            app.sendError(req,res,err)}
         if(result) {
             console.log(result)
             if (!(result.password === req.query.password)) {
@@ -21,10 +21,13 @@ router.get('/login', function (req, res) {
                 return;
             }
             var profile = {
-                firstName: result.name,
+                firstName: result.firstName,
+                lasttName: result.lastName,
                 emailId: result.emailId,
+                address:result.address1,
                 phoneNumber: result.phoneNumber,
-                id:result._id
+                id:result._id,
+                role:result.role
             };
             console.log({isError: false, data: profile})
             app.send(req, res, profile)

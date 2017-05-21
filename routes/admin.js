@@ -9,7 +9,7 @@ var app = require('../custom/index.js');
 var express = require('express');
 var _ = require('lodash');
 var router = express.Router();
-var async=require('async')
+var async=require('async');
 
 router.get('/dashboard',function (req,res) {
 
@@ -73,9 +73,5 @@ router.get('/approve',function (req,res) {
     }
 
 })
-
-
-
-
 
 module.exports = router;

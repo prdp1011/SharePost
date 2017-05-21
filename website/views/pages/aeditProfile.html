@@ -1,0 +1,69 @@
+
+<div class="row" ng-controller="eprofileCtrl" style="width: 98%;">
+    <div class="card" style="width: 80%;margin: auto; margin-top: 2%">
+        <div class="card-image waves-effect waves-block waves-light" >
+            <img class="" src="http://res.cloudinary.com/dh5gx0t5p/image/upload/v1495188266/user-profile-bg_hbub9d.jpg" alt="user background" width="" height="233px">
+
+        </div>
+        <figure class="card-profile-image" style="position: absolute; margin-top: 10%" data-activates='demoDropdown' dropdown>
+            <img src="http://res.cloudinary.com/dh5gx0t5p/image/upload/v1495188263/avatar_oiu9ev.jpg" alt="profile image" class="circle z-depth-2 responsive-img">
+        </figure>
+        <ul id='demoDropdown' class='dropdown-content' style="margin-top: 20% ; margin-left: 4%">
+            <li><a href="javascript:void(0);" >View Photo</a></li>
+            <li><a href="javascript:void(0);">Upload Photo</a></li>
+            <li><a href="javascript:void(0);">Remove Photo</a></li>
+        </ul>
+        <div class="card-content">
+            <div class="row">
+                <div class="col l2 s12 offset-l2  center-align">
+                    <h6 class=" grey-text text-darken-4">{{shopk.firstName}}</h6>
+                    <p class="medium-small grey-text">Name</p>
+                </div>
+                <div class="col l2 s12 center-align">
+                    <h6 class=" grey-text text-darken-4">{{shopk.phoneNumber}}</h6>
+                    <p class="medium-small grey-text">Phone Number</p>
+                </div>
+                <div class="col l2 s12 push-s2 center-align">
+                    <h6 class=" grey-text text-darken-4">{{shopk.emailId}}</h6>
+                    <p class="medium-small grey-text">Email ID</p>
+                </div>
+                <div class="col l2 s12 pull-s2 center-align">
+	            <span class="flow-text">
+	            	<h6 class=" grey-text text-darken-4">{{shopk.address1}}</h6></span>
+                    <p class="medium-small grey-text">Address</p>
+                </div>
+                <div class="col l2 push-l2 center-align"></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="progress row" ng-if="shopFlag">
+        <div class="indeterminate"></div>
+    </div>
+    <div >
+        <!--<div class="col s12">-->
+        <div class="card" class="row col s12 l12" ng-repeat="p in profileProduct" >
+            <div style="height: 150px">
+                <div class="card-image" ng-repeat="i in p.pImages">
+                    <div class="col s12  l3">
+                        <div class="col s1 l1 offset-s11" style="margin-left: 97%;     margin-bottom: -6%;" >
+                            <a class="btn-floating activator waves-effect waves-light darken-2 right red" ng-click="removePhoto(i.url,p.id)">
+                                <i class="material-icons">close</i>
+                            </a>
+                        </div>
+                        <img  ng-src={{i.url}} style=" height: 120px;width: 120px">
+                    </div>
+                </div>
+                <div class="card-content">
+                    <span class="card-title">Product Name:{{p.title}}</span>
+                    <p> Categoty:{{p.pdata.category}}</p>
+                    <p> Price:{{p.pdata.price}}</p>
+                </div>
+
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<style> .card-image { position:absolute;  } .card-profile-image { position:absolute; top: 25px; left: 25px; z-index: 2; } </style>
+

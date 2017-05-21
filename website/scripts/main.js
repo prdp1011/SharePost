@@ -13,11 +13,14 @@ app.factory('authSvc', function($http, $q, $window, apisrv, $rootScope) {
     self.onlogin = function(uname, data) {
         self.userinfo = {
             username: uname,
+            address:data.address,
             firstName: data.firstName,
             emailId: data.emailId,
             phoneNumber: data.phoneNumber,
-            id: data.id
+            id: data.id,
+            role:data.role
         };
+
         $window.localStorage[storage_key] = JSON.stringify(self.userinfo);
         return setAuthHeader();
     };
@@ -31,6 +34,9 @@ app.factory('authSvc', function($http, $q, $window, apisrv, $rootScope) {
             $rootScope.userinfo = self.userinfo;
             console.log(self.userinfo);
             setAuthHeader();
+            console.log('onlogin',self.userinfo.role)
+            $rootScope.role=self.userinfo.role;
+
             return console.log('loading ... userinfo');
         }else{
             $rootScope.signFlag=false
@@ -46,8 +52,10 @@ app.factory('authSvc', function($http, $q, $window, apisrv, $rootScope) {
                 return deferred.reject(result.data);
             } else {
                 $rootScope.signFlag=true
+
                 console.log("api data", result.data);
                 self.onlogin(username, result.data.data);
+                $rootScope.role=self.userinfo.role
                 return deferred.resolve(self.userinfo);
             }
         });
@@ -111,7 +119,7 @@ app.factory('authSvc', function($http, $q, $window, apisrv, $rootScope) {
         $scope.upload = function(files) {
             console.log("called");
             $scope.data = {
-                // userId: authSvc.getUserInfo().id,
+                userId: authSvc.getUserInfo().id,
                 category: $scope.category,
                 subCategory:$scope.subCategory,
                 name: $scope.productName,
@@ -119,7 +127,7 @@ app.factory('authSvc', function($http, $q, $window, apisrv, $rootScope) {
                 files: files
             };
             Upload.upload({
-                url: apisrv.path("/upload"),
+                url: "/upload",
                 arrayKey: '',
                 data: $scope.data
             }).then(function(response) {
@@ -253,9 +261,10 @@ app.controller('logoutCtrl',['$scope','$rootScope','$location','$window',functio
 
             $scope.logout=function () {
                 console.log("lofout")
-               window.localStorage.clear();
+               window.localStorage.clear()
                 $rootScope.signFlag=false
                 $location.path('/')
+                $window.location.reload()
             }
 
 
@@ -408,35 +417,114 @@ $scope.shop={}
 
     }
 
+
+    $scope.cat={cat:[],subcat:[]}
+
+
+    $scope.add={}
+    $scope.addNew=function () {
+console.log("hi",$scope.add.inputCat,$scope.add.switch)
+        if($scope.add.switch==false){
+            $scope.cat.cat.push($scope.add.inputCat)
+            console.log($scope.cat)
+        }else {
+            $scope.cat.subcat.push($scope.add.inputCat)
+        }
+    }
+
+
 }])
 
-app.controller('profileCtrl',['$scope','$rootScope','$http','$window','$location','Upload','$timeout','apisrv',function ($scope,$rootScope,$http,$window,$location,Upload,$timeout,apisrv) {
-$scope.shop= {'firstName':'Allll', 'phoneNumber':'23213123', 'emailId':'sdkh@kjcv', 'address1':'delhi'}
-$scope.profileData = 
- {
-    'title': 'Sam',
-    'pdata': 'I am a very simple. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.',
-    'pImages': [{
-        'url': 'http://res.cloudinary.com/dh5gx0t5p/image/upload/v1495188263/avatar_oiu9ev.jpg'
-    }, {
-        'url': 'http://res.cloudinary.com/dh5gx0t5p/image/upload/v1495188266/user-profile-bg_hbub9d.jpg'
-    }, {
-        'url': 'http://res.cloudinary.com/dh5gx0t5p/image/upload/v1493558738/sample.jpg'
-    }]
- }
 
- $scope.removePhoto=function(url){
-        $scope.shopFlag=true
-        console.log(url)
-        $timeout(function() {
-                $scope.shopFlag=false
+app.controller('eprofileCtrl',['$scope','$rootScope','$http','$window','$location','Upload','$timeout','apisrv','authSvc','$routeParams',function ($scope,$rootScope,$http,$window,$location,Upload,$timeout,apisrv,authSvc,$routeParams) {
+$http.post('/shopkeeper/getshopkeeper',{userId:$routeParams.id})
+    .then(function (response) {
+        console.log(response.data.data)
+        $scope.shopk =response.data.data
+        $http.post('/shopkeeper/getProduct',{userId:$routeParams.id})
+            .then(function (response) {
+                console.log(response.data.data)
+                $scope.profileProduct =response.data.data
 
-        }, 1000);
-        
+
+            })
+
+
+    })
+
+
+
+ $scope.removePhoto=function(url,pId){
+     $http.post('/shopkeeper/removeProduct',{pId:pId,url:url})
+         .then(function (response) {
+             if(response.data.isError){
+                 alert("error in removing")
+             }else{
+                 console.log(response.data.data)
+                 $scope.profileProduct =response.data.data
+                 $http.post('/shopkeeper/getProduct',{userId:authSvc.getUserInfo().id})
+                     .then(function (response) {
+                         console.log(response.data.data)
+                         $scope.profileProduct =response.data.data
+
+
+                     })
+
+             }
+
+
+         })
 
 
  }
 console.log("asdkhasl")
+
+
+}]);
+app.controller('profileCtrl',['$scope','$rootScope','$http','$window','$location','Upload','$timeout','apisrv','authSvc',function ($scope,$rootScope,$http,$window,$location,Upload,$timeout,apisrv,authSvc) {
+
+   $scope.shop= authSvc.getUserInfo()
+$http.post('/shopkeeper/getProduct',{userId:authSvc.getUserInfo().id})
+    .then(function (response) {
+        console.log(response.data.data)
+        $scope.profileProduct =response.data.data
+
+
+    })
+
+
+
+ $scope.removePhoto=function(url,pId){
+     $http.post('/shopkeeper/removeProduct',{pId:pId,url:url})
+         .then(function (response) {
+             if(response.data.isError){
+                 alert("error in removing")
+             }else{
+                 console.log(response.data.data)
+                 $scope.profileProduct =response.data.data
+                 $http.post('/shopkeeper/getProduct',{userId:authSvc.getUserInfo().id})
+                     .then(function (response) {
+                         console.log(response.data.data)
+                         $scope.profileProduct =response.data.data
+
+
+                     })
+
+             }
+
+
+         })
+
+
+ }
+console.log("asdkhasl")
+
+
+}]);
+
+app.controller('homeCtrl',['$scope','$rootScope','$window',function ($scope,$rootScope,$window) {
+
+    console.log("rooot",$rootScope.role)
 
 
 }])
