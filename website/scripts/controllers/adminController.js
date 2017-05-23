@@ -6,6 +6,7 @@ app.controller('adminCtrl', ['$scope', '$rootScope', '$http', '$window', '$locat
     $scope.oldList = [];
     $scope.getData = {}
     $scope.newList = []
+    $scope.dataM = {};
     $scope.edit = {};
     $scope.edit.listText = ''
     $scope.edit.value = ''
@@ -165,7 +166,16 @@ app.controller('adminCtrl', ['$scope', '$rootScope', '$http', '$window', '$locat
 
             })
     }
+        $scope.arrMemberAdded= [];
+       $scope.addNewMember = function(){
+            console.log($scope.dataM)
+                $scope.arrMemberAdded.push($scope.dataM);
+                $scope.dataM={}
+       }
+        $scope.submitMemArr=function(){
 
+            console.log($scope.arrMemberAdded);
+        }
     $scope.editAdd = function () {
         $scope.newList.push($scope.edit.listText)
         $scope.showList.push($scope.edit.listText)
