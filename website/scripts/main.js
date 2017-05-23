@@ -404,7 +404,7 @@ app.controller('eprofileCtrl', ['$scope', '$rootScope', '$http', '$window', '$lo
                 } else {
                     console.log(response.data.data)
                     $scope.profileProduct = response.data.data
-                    $http.post('/shopkeeper/getProduct', {userId: authSvc.getUserInfo().id})
+                    $http.post('/shopkeeper/getProduct',{userId: $routeParams.id})
                         .then(function (response) {
                             console.log(response.data.data)
                             $scope.profileProduct = response.data.data
