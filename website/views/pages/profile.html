@@ -23,16 +23,16 @@
 	                <h6 class=" grey-text text-darken-4">{{shop.phoneNumber}}</h6>
 	                <p class="medium-small grey-text">Phone Number</p>                        
 	            </div>
-	            <div class="col l2 s12 push-s2 center-align">
+	            <div class="col l2 s12 center-align">
 	                <h6 class=" grey-text text-darken-4">{{shop.emailId}}</h6>
 	                <p class="medium-small grey-text">Email ID</p>                       
 	            </div>                    
-	            <div class="col l2 s12 pull-s2 center-align">
+	            <div class="col l2 s12  center-align">
 	            <span class="flow-text">
 	            	<h6 class=" grey-text text-darken-4">{{shop.address}}</h6></span>
 	                <p class="medium-small grey-text">Address</p>                       
 	            </div>
-	            <div class="col l2 push-l2 center-align"></div>
+	            <div class="col l2 center-align"></div>
 	          </div>
           </div>
 
@@ -40,10 +40,14 @@
 <div class="progress row" ng-if="shopFlag">
                 <div class="indeterminate"></div>
             </div>
+
+
 <div >
-	<!--<div class="col s12">-->
-		<div class="card" class="row col s12 l12" ng-repeat="p in profileProduct" >
-			<div style="height: 150px">
+	 <div class="row "  ng-repeat="p in profileProduct" >
+        <div class="col s12 l12">
+
+		<div class="card">
+			<div >
 			<div class="card-image" ng-repeat="i in p.pImages">
 			<div class="col s12  l3">
 			 <div class="col s1 l1 offset-s11" style="margin-left: 97%;     margin-bottom: -6%;" >
@@ -51,17 +55,33 @@
                           <i class="material-icons">close</i>
                       </a>
                     </div>
-          		<img  ng-src={{i.url}} style=" height: 120px;width: 120px">
+          		<img  ng-src={{i.url}} style=" height: 150px;">
           		</div>
         </div>
-        <div class="card-content">
-           <span class="card-title">Product Name:{{p.title}}</span>
-          <p> Categoty:{{p.pdata.category}}</p>
-          <p> Price:{{p.pdata.price}}</p>
+        <div class="card-content" ng-style="p.myObj">
+            <div class="row">
+                <div class="col l2 s12   center-align">
+                    <h6 class=" grey-text text-darken-4">{{p.title}}</h6>
+                    <p class="medium-small grey-text">Product Name</p>
+                </div>
+                <div class="col l2 s12 center-align">
+                    <h6 class=" grey-text text-darken-4">{{p.pdata.category}}</h6>
+                    <p class="medium-small grey-text">Categoty</p>
+                </div>
+                <div class="col l2 s12  center-align">
+                    <h6 class=" grey-text text-darken-4">{{p.pdata.price}}</h6>
+                    <p class="medium-small grey-text">Price</p>
+                </div>
+                <div class="col l1 s1 offset-l5 s11 center-align">
+                        <p style="font-size: 18px"><a class="btn btn-floating pulse purple"
+                                                      ng-click= "deleteCard(p)"><i class="material-icons">remove</i></a>
+                        </p>
+                </div>
+            </div>
         </div>
 		
-		<!--</div>-->
-	</div>
+		</div>
+</div>	</div>
 </div>
 </div>
 </div>
