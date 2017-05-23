@@ -1,8 +1,6 @@
 <div  ng-controller="adminCtrl">
-<div class="container">
-    <div class="row">
         <div class="col s12">
-            <ul tabs reload="allTabContentLoaded">
+            <ul tabs class="tabs-fixed-width">
                 <li class="tab col s3"><a class="active" href="#test1">DashBoard</a></li>
                 <li class="tab col s3"><a  href="#test2">Shopkeeper</a></li>
                 <li class="tab col s3"><a href="#test3">Consumer</a></li>
@@ -10,19 +8,20 @@
 <!--                <li class="tab col s3"><a href="#test1">Consumer1</a></li>-->
             </ul>
         </div>
+
+
+
+    <div class="conainer" style="height: 500px;width:50%;margin: auto ">
         <div id="test1" class="col s12" style="margin-top: 5%">
             <div class="progress" ng-if="chartFlag">
                 <div class="indeterminate"></div>
             </div>
             <nvd3 options="options" data="data"></nvd3>
         </div>
-       
-    </div>
-</div>
 
 
 
-<div class="row">
+
 <div id="test2" class="card col s10 offset-s1" style="">
 
  <div class="progress row" ng-if="shopFlag">
@@ -30,10 +29,11 @@
             </div>
             <div  class= "col s12" input-field="" >
                 <h6 class="col s12 l4 offset-l2" style="text-align: center">Select Shopkeeper</h6>
-                <span class="col s12 l4"  style="margin-left: 0%;margin-top: -1%;">
-                <select  style="margin-top: -5%" ng-model="select.value"  ng-options="value._id as value.shopName for value in select.choices" material-select watch ng-change="loadDetail()">
+                <div
+                        class="col s12 l4"  style=" max-width:50%;margin:auto">
+                <select  style="max-width: 20%" ng-model="select.value"  ng-options="value._id as value.shopName for value in select.choices" material-select watch ng-change="loadDetail()">
                     <!--<option ng-repeat="value._id as valuse.shopName for value in select.choices">{{value}}</option>-->
-                </select></span>
+                </select></div>
                 
             </div>
             <div class = "row"></div>
@@ -54,27 +54,28 @@
                 </ul>
                 <div class="card-content">
                   <div class="row">                    
-                    <div class="col l2 s12 offset-l2  center-align">                        
-                        <h4 class="card-title grey-text text-darken-4">{{shop.firstName}}</h4>
-                        <p class="medium-small grey-text">Name</p>                        
+                    <div class="col l2 s12   center-align">
+                        <p style="font-size: 18px" class=" grey-text text-darken-4">{{shop.firstName}}</p>
+                        <p   class="medium-small grey-text">Name</p>
                     </div>
-                    <div class="col l2 s12 center-align">
-                        <h4 class="card-title grey-text text-darken-4">{{shop.phoneNumber}}</h4>
-                        <p class="medium-small grey-text">Phone Number</p>                        
+                    <div class="col l3 s12 center-align">
+                        <p style="font-size: 18px"  class=" grey-text text-darken-4">{{shop.phoneNumber}}</p>
+                        <p class="medium-small grey-text">Phone Number</p>
                     </div>
-                    <div class="col l2 s12 center-align">
-                        <h4 class="card-title grey-text text-darken-4">{{shop.emailId}}</h4>
-                        <p class="medium-small grey-text">Email ID</p>                        
+                    <div class="col l3 s12 center-align">
+                        <p style="font-size: 18px"  class=" grey-text text-darken-4">{{shop.emailId}}</p>
+                        <p class="medium-small grey-text">Email ID</p>
                     </div>                    
                     <div class="col l2 s12 center-align">
-                        <h4 class="card-title grey-text text-darken-4"><span ng-if="shop.approve==true">Approved</span>
-                        <span ng-if="shop.approve==false">Not Approved</span></h4>
+                        <p style="font-size: 18px;color: green"  class=" grey-text text-darken-4"><span ng-if="shop.approve==true">Approved</span>
+                        <span ng-if="shop.approve==false" style="color: red">Not Approved</span>
                         <p class="medium-small grey-text">Status</p>                        
-                    </div> <div class="col l2 s12 center-align">
-                        <h4><a class="btn" href="#/pages/eprofile/{{shop._id}}">View Profile</a></h4>
                     </div>
-                    <div class="col s1 l1 offset-s11 right-align" style="margin-top: -4%">
-                      <a class="btn-floating activator waves-effect waves-light darken-2 right">
+                      <div class="col l1 s1 center-align">
+                        <p style="font-size: 18px" ><a class="btn btn-floating pulse purple" href="#/pages/eprofile/{{shop._id}}"><i class="material-icons">menu</i></a></p>
+                    </div>
+                    <div class="col s1 l1 " style="margin-top: -10%">
+                      <a class="btn btn-floating pulse activator waves-effect waves-light darken-2 right purple">
                           <!-- <i class="fa fa-pencil-square-o"></i> -->
                           <i class="material-icons">edit</i>
                       </a>
@@ -125,39 +126,41 @@
             </div>
 
 
-  </div>
     <div id="test3" class="col s12">Test 3</div>
-    <div id="test4" class="col s12">
-        <div class="row col s12 l12">
-            <div class="row col s12 l12">
-                <div class="col s12 l6"><p>Category</p></div>
-                <div class="col s12 l6"><p>Sub Category</p></div>
-            </div>
-           <div class="col s12 l6">
-               <p ng-repeat="n in cat.cat track by $index">{{n}}</p>
-           </div>
-           <div class="col s12 l6">
-               <p ng-repeat="m in cat.subcat track by $index">{{m}}</p>
-           </div>
+    <div id="test4" class="col s12" style="width: 50%;margin: auto">
+
+        <div class="col s12">
+            <ul tabs reload="allTabContentLoaded">
+                <li class="tab col s6"><a class="active" href="#cat1">Create</a></li>
+                <li class="tab col s6"><a  href="#cat2">Edit</a></li>
+            </ul>
         </div>
-        <div class="row col s12 l12">
-            <div class="switch">
-                <label>
-                    Categoty
-                    <input ng-init="add.switch=false" type="checkbox" ng-model="add.switch">
-                    <span class="lever"></span>
-                    Sub Category
-                </label>
+        <div id="cat1" class="col s12">
+            <div input-field="">
+                <input type="text" ng-model="create.add1"  length="150">
+                <label>Add Category</label>
             </div>
+            <button type="button"  class="btn" ng-click="addCat()">Add</button>
+
         </div>
-        <div class="row col s12 l12">
-            <div input-field="" class="col s12 l6">
-                <input type="text" ng-model="add.inputCat" length="150">
-                <label>Input label</label>
+        <div id="cat2" class="col s12">
+             <span >
+                <select style="width: 20%" ng-model="edit.selectCat"  ng-options="value._id as value.name for value in getData.select" material-select watch ng-change="loadSubCat()">
+                    <!--<option ng-repeat="value._id as valuse.shopName for value in select.choices">{{value}}</option>-->
+                </select></span>
+
+            <div input-field="">
+                <input type="text" ng-model="edit.listText"  length="150">
+                <label>Add Category</label>
             </div>
-            <div input-field="" class="col s12 l6">
-                <button  class="btn" type="button" ng-click="addNew()">add</button>
-            </div>
+            <button type="button" class="btn " ng-click="editAdd()">Add</button>
+
+            <table class="responsive-table striped">
+                <thead><tr><th>Sub Category</th></tr></thead>
+                <tbody><tr ng-repeat="data in showList track by $index"><td>{{data}}</td></tr></tbody>
+            </table>
+            <button type="button" class="btn " ng-click="submitNew()">Submit</button>
+
         </div>
     </div>
 </div>

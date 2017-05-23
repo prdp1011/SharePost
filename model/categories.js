@@ -10,7 +10,7 @@ var async=require('async')
 // create a schema
 var categoriesSchema = new Schema({
     name:'String',
-    type:'String',
+    subCategory:[],
     updatedAt:'Date',
     createdAt:'Date'
 });

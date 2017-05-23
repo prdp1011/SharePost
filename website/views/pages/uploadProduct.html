@@ -4,13 +4,12 @@
      <form>
         <input ng-model="productName" placeholder="Product Name" required>
         <input ng-model="productPrice" placeholder="Price" required>
-         <select placeholder="Select Category" class="" ng-model="category" material-select watch>
-             <option value="" >select category</option>
-             <option ng-repeat="value in cats ">{{value}}</option>
-         </select>
-         <select class="" ng-model="subCategory" material-select watch>
-             <option value="" >select Sub category</option>
-             <option ng-repeat="value in cats ">{{value}}</option>
+         <span >
+                <select ng-model="dats.Cat"  ng-options="value._id as value.name for value in dats.select" material-select watch ng-change="loadSubCat()">
+                    <!--<option ng-repeat="value._id as valuse.shopName for value in select.choices">{{value}}</option>-->
+                </select></span>
+         <select class="" ng-model="dats.subCategory" material-select watch>
+             <option ng-repeat="value in dats.subCat ">{{value}}</option>
          </select>
      </form>
  </div>

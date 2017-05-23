@@ -66,6 +66,32 @@ router.post('/removeProduct',function (req,res) {
 
     })
 })
+router.post('/getCat',function (req,res) {
+
+    Category.find({
+    },function (err,result) {
+        if(err){
+            app.sendError(req,res,result)
+        }else {
+            console.log(result)
+            app.send(req, res, result)
+        }
+    })
+
+})
+router.post('/getSubCat',function (req,res) {
+
+    Category.findOne({_id:req.body.id
+    },function (err,result) {
+        if(err){
+            app.sendError(req,res,result)
+        }else {
+            console.log(result)
+            app.send(req, res, result)
+        }
+    })
+
+})
 
 
 

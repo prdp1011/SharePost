@@ -29,7 +29,7 @@ router.get('/dashboard',function (req,res) {
             "color":"#D62728",
             "values":data
         }
-        
+
         app.send(req,res,[sendData])
 
     })
@@ -66,6 +66,61 @@ router.get('/approve',function (req,res) {
         })
 
     }
+
+})
+
+router.post('/addCat',function (req,res) {
+
+    Category.create({
+        name:req.body.name
+
+    },function (err,result) {
+        if(err){
+            app.sendError(req,res,result)
+        }else {
+            console.log(result)
+            app.send(req, res, result)
+        }
+    })
+
+})
+router.post('/getCat',function (req,res) {
+
+    Category.find({
+    },function (err,result) {
+        if(err){
+            app.sendError(req,res,result)
+        }else {
+            console.log(result)
+            app.send(req, res, result)
+        }
+    })
+
+})
+router.post('/getSubCat',function (req,res) {
+
+    Category.findOne({_id:req.body.id
+    },function (err,result) {
+        if(err){
+            app.sendError(req,res,result)
+        }else {
+            console.log(result)
+            app.send(req, res, result)
+        }
+    })
+
+})
+router.post('/addSubCat',function (req,res) {
+
+    Category.update({_id:req.body.id
+    },{ $push: { subCategory: { $each: req.body.subCatArray } } },function (err,result) {
+        if(err){
+            app.sendError(req,res,result)
+        }else {
+            console.log(result)
+            app.send(req, res, result)
+        }
+    })
 
 })
 
