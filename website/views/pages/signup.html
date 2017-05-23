@@ -37,22 +37,21 @@
               <label for="first-name">First Name</label>
             </div>
             <div class="col m6 s12" input-field >
-              <input id="last-name" type="text" class="validate" ng-model="userData.lastName"  ng-required="true">
+              <input id="last-name" type="text" class="validate" ng-model="userData.lastName"  nrequired="true">
               <label for="last-name">Last Name</label>
              </div>
 
             </div>
             <div class="row">
              <div input-field class="col m6 s12">
-                  <input id="last-name" type="text" class="validate" ng-model="userData.phoneNumber"  ng-required="true">
+                  <input id="last-name" type="text" class="validate" ng-model="userData.phoneNumber"  maxlength="10" disabled="" ng-required="true">
                   <label for="last-name">Phone Number</label>
              </div>
              <div class="col m6 s12">
              <div  input-field >
-              <input id="email" type="email" name="email" ng-model="userData.emailId" class="validate"  ng-required="true">
+              <input id="email" type="email" name="email" ng-model="userData.emailId"  >
               <label for="email">Email</label>
              </div>
-             <p class="alert alert-danger" ng-show="form-register.email.$error.email">Your email is invalid.</p>
              </div>
              </div>
              <div class="row">
@@ -83,18 +82,18 @@
                   <label for="add-name">Address</label>
              </div>
                <div input-field class="col m6 s12">
-                  <input id="pan" type="text" class="validate" ng-model="userData.panNo"  ng-required="true">
+                  <input id="pan" type="text" class="validate" ng-model="userData.panNo"  >
                   <label for="pan">Pan Number</label>
              </div>
              </div>
              <div class="row">
              <div input-field class="col m6 s12">
-                  <input id="tin" type="text" class="validate" ng-model="userData.tinNo"  ng-required="true">
-                  <label for="tin">TIN Number</label>
+                  <input id="tin" type="text" class="validate" ng-model="userData.tinNo"  >
+                  <label for="tin">Tin Number</label>
              </div> 
              <div input-field class="col m6 s12">
                 <select placeholder="Select Category" class="" ng-model="userData.cat" material-select watch>
-                    <option ng-repeat="value in cats">{{value}}</option>
+                    <option ng-repeat="value in cats">{{value.name}}</option>
                 </select>
             </div>
               </div>

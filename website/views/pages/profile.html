@@ -41,49 +41,131 @@
                 <div class="indeterminate"></div>
             </div>
 
+    <div style="width: 50%;margin: auto">
+        <div ng-repeat="p in profileProduct" >
 
-<div >
-	 <div class="row "  ng-repeat="p in profileProduct" >
-        <div class="col s12 l12">
-
-		<div class="card">
-			<div >
-			<div class="card-image" ng-repeat="i in p.pImages">
-			<div class="col s12  l3">
-			 <div class="col s1 l1 offset-s11" style="margin-left: 97%;     margin-bottom: -6%;" >
-                      <a class="btn-floating activator waves-effect waves-light darken-2 right red" ng-click="removePhoto(i.url,p.id)">
-                          <i class="material-icons">close</i>
-                      </a>
+            <div class="row col l12 s12">
+                <div class="col s12 l12">
+                    <div class="card">
+                        <div class="card-image ">
+                            <div class="row l12">
+                                <div class="col l3" ng-repeat="i in p.pImages">
+                                    <a class="btn-floating activator waves-effect waves-light darken-2 right red" ng-click="removePhoto(i.url,p.id)">
+                                        <i class="material-icons">close</i>
+                                    </a>
+                                    <img  ng-src={{i.url}} style=" height: 80px;width:100px " class="z-depth-3 responsive-img">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <div class="row">
+                                <div class="col l4 s12   center-align">
+                                    <h6 class=" grey-text text-darken-4">{{p.title}}</h6>
+                                    <p class="medium-small grey-text">Product Name</p>
+                                </div>
+                                <div class="col l4 s12 center-align">
+                                    <h6 class=" grey-text text-darken-4">{{p.pdata.category}}</h6>
+                                    <p class="medium-small grey-text">Categoty</p>
+                                </div>
+                                <div class="col l3 s12  center-align">
+                                    <h6 class=" grey-text text-darken-4">{{p.pdata.price}}</h6>
+                                    <p class="medium-small grey-text">Price</p>
+                                </div>
+                                <div class="col l1 s1  s11 center-align">
+                                    <p style="font-size: 18px"><a class="btn btn-floating pulse purple"
+                                                                  ng-click= "deleteCard(p)"><i class="material-icons">remove</i></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-          		<img  ng-src={{i.url}} style=" height: 150px;">
-          		</div>
-        </div>
-        <div class="card-content" ng-style="p.myObj">
-            <div class="row">
-                <div class="col l2 s12   center-align">
-                    <h6 class=" grey-text text-darken-4">{{p.title}}</h6>
-                    <p class="medium-small grey-text">Product Name</p>
-                </div>
-                <div class="col l2 s12 center-align">
-                    <h6 class=" grey-text text-darken-4">{{p.pdata.category}}</h6>
-                    <p class="medium-small grey-text">Categoty</p>
-                </div>
-                <div class="col l2 s12  center-align">
-                    <h6 class=" grey-text text-darken-4">{{p.pdata.price}}</h6>
-                    <p class="medium-small grey-text">Price</p>
-                </div>
-                <div class="col l1 s1 offset-l5 s11 center-align">
-                        <p style="font-size: 18px"><a class="btn btn-floating pulse purple"
-                                                      ng-click= "deleteCard(p)"><i class="material-icons">remove</i></a>
-                        </p>
                 </div>
             </div>
+
+            <!--<div class="col s12 l12">-->
+            <!--<div class="card z-depth-2"  >-->
+            <!--<div class="row col l12 s12">-->
+            <!--<div class="card-image" ng-repeat="i in p.pImages">-->
+            <!--<div class="col s12  l2">-->
+            <!--<div class="col s1 l1 offset-s11" style="margin-left: 97%;     margin-bottom: -6%;" >-->
+            <!--<a class="btn-floating activator waves-effect waves-light darken-2 right red" ng-click="removePhoto(i.url,p.id)">-->
+            <!--<i class="material-icons">close</i>-->
+            <!--</a>-->
+            <!--</div>-->
+            <!--<img  ng-src={{i.url}} style=" height: 80px;width:100px " class="z-depth-3 responsive-img"s>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row col l12 s12">-->
+            <!--<div class="card-content" ng-style="p.myObj">-->
+            <!--<div class="row">-->
+            <!--<div class="col l2 s12   center-align">-->
+            <!--<h6 class=" grey-text text-darken-4">{{p.title}}</h6>-->
+            <!--<p class="medium-small grey-text">Product Name</p>-->
+            <!--</div>-->
+            <!--<div class="col l2 s12 center-align">-->
+            <!--<h6 class=" grey-text text-darken-4">{{p.pdata.category}}</h6>-->
+            <!--<p class="medium-small grey-text">Categoty</p>-->
+            <!--</div>-->
+            <!--<div class="col l2 s12  center-align">-->
+            <!--<h6 class=" grey-text text-darken-4">{{p.pdata.price}}</h6>-->
+            <!--<p class="medium-small grey-text">Price</p>-->
+            <!--</div>-->
+            <!--<div class="col l1 s1 offset-l5 s11 center-align">-->
+            <!--<p style="font-size: 18px"><a class="btn btn-floating pulse purple"-->
+            <!--ng-click= "deleteCard(p)"><i class="material-icons">remove</i></a>-->
+            <!--</p>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
         </div>
-		
-		</div>
-</div>	</div>
-</div>
-</div>
+    </div>
+
+<!--<div >-->
+	 <!--<div class="row "  ng-repeat="p in profileProduct" >-->
+        <!--<div class="col s12 l12">-->
+
+		<!--<div class="card">-->
+			<!--<div >-->
+			<!--<div class="card-image" ng-repeat="i in p.pImages">-->
+			<!--<div class="col s12  l3">-->
+			 <!--<div class="col s1 l1 offset-s11" style="margin-left: 97%;     margin-bottom: -6%;" >-->
+                      <!--<a class="btn-floating activator waves-effect waves-light darken-2 right red" ng-click="removePhoto(i.url,p.id)">-->
+                          <!--<i class="material-icons">close</i>-->
+                      <!--</a>-->
+                    <!--</div>-->
+          		<!--<img  ng-src={{i.url}} style=" height: 150px;">-->
+          		<!--</div>-->
+        <!--</div>-->
+        <!--<div class="card-content" ng-style="p.myObj">-->
+            <!--<div class="row">-->
+                <!--<div class="col l2 s12   center-align">-->
+                    <!--<h6 class=" grey-text text-darken-4">{{p.title}}</h6>-->
+                    <!--<p class="medium-small grey-text">Product Name</p>-->
+                <!--</div>-->
+                <!--<div class="col l2 s12 center-align">-->
+                    <!--<h6 class=" grey-text text-darken-4">{{p.pdata.category}}</h6>-->
+                    <!--<p class="medium-small grey-text">Categoty</p>-->
+                <!--</div>-->
+                <!--<div class="col l2 s12  center-align">-->
+                    <!--<h6 class=" grey-text text-darken-4">{{p.pdata.price}}</h6>-->
+                    <!--<p class="medium-small grey-text">Price</p>-->
+                <!--</div>-->
+                <!--<div class="col l1 s1 offset-l5 s11 center-align">-->
+                        <!--<p style="font-size: 18px"><a class="btn btn-floating pulse purple"-->
+                                                      <!--ng-click= "deleteCard(p)"><i class="material-icons">remove</i></a>-->
+                        <!--</p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+		<!---->
+		<!--</div>-->
+<!--</div>	</div>-->
+<!--</div>-->
+<!--</div>-->
 </div>
  <style> .card-image { position:absolute;  } .card-profile-image { position:absolute; top: 25px; left: 25px; z-index: 2; } </style>
 

@@ -244,25 +244,39 @@ app.controller('loginCtrl', [
 
     .controller('NavContainerCtrl', ['$scope', function ($scope) {
     }])
-    .controller('navCtrl', [
-        '$scope', '$window', '$location', function ($scope, $window, $location) {
 
+
+    .controller('navCtrl', [
+        '$scope','$rootScope', '$window', '$location','$http', function ($scope, $rootScope,$window, $location,$http) {
+
+    $scope.notifyMe=function () {
+        $rootScope.isButtonActive=true
+
+        $http.post('/admin/delNoti').then(function (response) {
+            $rootScope.noti=0;
+            $location.path('/pages/admin')
+
+        })
+
+
+    }
 
         }
     ])
 
-app.controller('signupCtrl', ["$scope", "$http", function ($scope, $http) {
+app.controller('signupCtrl', ["$scope", "$http","$routeParams","$location" ,function ($scope, $http,$routeParams,$location) {
     console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiii")
     $scope.userData = {}
 
-    $http.post('/getCat')
-    then(function (response) {
+    $http.post('/admin/getCat')
+        .then(function (response) {
+            console.log("fff",response)
 
-
+            $scope.cats=response.data.data
     })
 
-    $scope.cats = ["Cat1", 'Cat2', 'Cat3']
-
+    console.log("passed",$routeParams.phone)
+    $scope.userData.phoneNumber = $routeParams.phone;
 
 
     $scope.signUp = function () {
@@ -281,6 +295,7 @@ app.controller('signupCtrl', ["$scope", "$http", function ($scope, $http) {
 
                     Materialize.toast('Registered', 3000)
                     $scope.userData = {}
+                    $location.path('/signIn')
                 }
                 console.log(success);
 
@@ -327,7 +342,8 @@ app.controller('otpCtrl', ["$scope", "$http", "$location", function ($scope, $ht
                         alert("Enter Correct OTP")
 
                     } else {
-                        $location.path('/signupAdmin');
+                        console.log(success.data.data)
+                        $location.path("/signupAdmin/"+$scope.otpData.mobileNo);
 
 
                     }
@@ -339,7 +355,7 @@ app.controller('otpCtrl', ["$scope", "$http", "$location", function ($scope, $ht
             $http.post('/users/sendOtp', {phoneNumber: $scope.otpData.mobileNo})
                 .then(function (success) {
                     if (!success.data.isError) {
-                        console.log(success)
+                        console.log(success.data.data.message)
                         $scope.otpData.showOtpField = true;
                     } else {
 
@@ -510,6 +526,31 @@ app.controller('profileCtrl', ['$scope', '$rootScope', '$http', '$window', '$loc
 
 
 }]);
+
+
+app.controller('phoneDiaryCtrl',['$scope', '$rootScope', '$window','$http', function ($scope, $rootScope, $window,$http) {
+
+    $(document).ready(function() {
+        $('ul.tabs').tabs();
+        $("#btnContinue").click(function() {
+            $('ul.tabs').tabs('select_tab', 'test2');
+        });
+    });
+
+
+
+
+
+    $scope.Search=''
+    $http.post('/admin/getNumber')
+        .then(function (response) {
+
+
+            $scope.diary=response.data.data
+
+        })
+
+}])
 
 app.controller('homeCtrl', ['$scope', '$rootScope', '$window','$http', function ($scope, $rootScope, $window,$http) {
 

@@ -11,6 +11,17 @@ var _ = require('lodash');
 var router = express.Router();
 var async=require('async');
 
+router.post('/delNoti',function (req,res){
+
+ Admin.update({role:1},{$set:{notification:0}},function (err,resp1) {
+
+    app.send(req,res,resp1)
+
+ })
+
+})
+
+
 router.get('/dashboard',function (req,res) {
 
     Admin.aggregate([{$group:{_id:{ $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },count:{$sum:1}}}],function (err,results) {
@@ -186,6 +197,31 @@ router.post('/addSubCat',function (req,res) {
         }
     })
 
+})
+
+
+router.post('/addNumber',function (req,res) {
+console.log(req.body)
+    var response=[]
+async.each(req.body,function (item,callback) {
+
+    Phonediary.create({name:item.name,number:item.number},function (err,result) {
+        response.push(result)
+        callback()
+    })
+
+
+},function (done) {
+app.send(req,res,response)
+})
+
+})
+router.post('/getNumber',function (req,res) {
+Phonediary.find({},function (err,result) {
+    if(err){app.sendError(req,res,"data not found",err)}else{
+        app.send(req,res,result)
+    }
+})
 })
 
 module.exports = router;

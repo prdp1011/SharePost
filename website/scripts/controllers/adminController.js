@@ -167,15 +167,30 @@ app.controller('adminCtrl', ['$scope', '$rootScope', '$http', '$window', '$locat
             })
     }
         $scope.arrMemberAdded= [];
+
+
+    $http.post('/admin/getNumber',$scope.arrMemberAdded)
+        .then(function (response) {
+            $scope.arrMemberAdded=response.data.data
+        })
+
        $scope.addNewMember = function(){
             console.log($scope.dataM)
                 $scope.arrMemberAdded.push($scope.dataM);
                 $scope.dataM={}
        }
         $scope.submitMemArr=function(){
-
             console.log($scope.arrMemberAdded);
+           $http.post('/admin/addNumber',$scope.arrMemberAdded)
+               .then(function (response) {
+
+               })
+
         }
+
+
+
+
     $scope.editAdd = function () {
         $scope.newList.push($scope.edit.listText)
         $scope.showList.push($scope.edit.listText)
@@ -187,6 +202,8 @@ app.controller('adminCtrl', ['$scope', '$rootScope', '$http', '$window', '$locat
             .then(function (response) {
                 if (!response.data.isError) {
                     console.log("mera data3", response.data.data)
+                    Materialize.toast('Submited', 4000)
+                }else {
 
                 }
 
