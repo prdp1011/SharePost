@@ -14,6 +14,7 @@ var productSchema = new Schema({
     category:'String',
     price:'String',
     name:'String',
+    uploadBy:'String',
     path:[],
     updatedAt:'Date',
     createdAt:'Date'

@@ -149,7 +149,10 @@ router.post('/notificationLogs',function (req,res) {
                                 _.forEach(result4,function (k) {
                                     if((s.userId).toString()==(k._id).toString()){
                                         console.log("matched")
-                                        result4[key].uploadby=k.shopName
+                                        console.log(key)
+
+                                        result3[key].uploadBy=k.shopName
+                                        console.log(result3[key])
                                     }
 
                                 })
