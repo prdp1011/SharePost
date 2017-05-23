@@ -368,13 +368,34 @@ app.controller('eprofileCtrl', ['$scope', '$rootScope', '$http', '$window', '$lo
                     console.log(response.data.data)
                     $scope.profileProduct = response.data.data
 
+                        $scope.profileProduct.forEach(function(dats){
+                                if (dats.pImages.length>0){
+                                $scope.myObj = {
+                                        'padding-top': '15%'
+                                      }
+
+                                    dats['myObj'] =  $scope.myObj
+                            }
+
+                            else{
+
+                                $scope.myObj = {}
+                                dats['myObj'] =  $scope.myObj;
+                            }
+                        })
+
 
                 })
 
 
         })
 
+       $scope.deleteCard =function(p){
+            console.log(p)
 
+
+
+       }
     $scope.removePhoto = function (url, pId) {
         $http.post('/shopkeeper/removeProduct', {pId: pId, url: url})
             .then(function (response) {
@@ -387,6 +408,23 @@ app.controller('eprofileCtrl', ['$scope', '$rootScope', '$http', '$window', '$lo
                         .then(function (response) {
                             console.log(response.data.data)
                             $scope.profileProduct = response.data.data
+
+                            $scope.profileProduct.forEach(function(dats){
+                                if (dats.pImages.length>0){
+                                $scope.myObj = {
+                                        'padding-top': '15%'
+                                      }
+
+                                    dats['myObj'] =  $scope.myObj
+                            }
+
+                            else{
+
+                                $scope.myObj = {}
+                                dats['myObj'] =  $scope.myObj;
+                            }
+                        })
+
 
 
                         })
@@ -410,6 +448,21 @@ app.controller('profileCtrl', ['$scope', '$rootScope', '$http', '$window', '$loc
             console.log(response.data.data)
             $scope.profileProduct = response.data.data
 
+                $scope.profileProduct.forEach(function(dats){
+                                if (dats.pImages.length>0){
+                                $scope.myObj = {
+                                        'padding-top': '15%'
+                                      }
+
+                                    dats['myObj'] =  $scope.myObj
+                            }
+
+                            else{
+
+                                $scope.myObj = {}
+                                dats['myObj'] =  $scope.myObj;
+                            }
+                        })
 
         })
 
@@ -426,6 +479,22 @@ app.controller('profileCtrl', ['$scope', '$rootScope', '$http', '$window', '$loc
                         .then(function (response) {
                             console.log(response.data.data)
                             $scope.profileProduct = response.data.data
+
+                            $scope.profileProduct.forEach(function(dats){
+                                if (dats.pImages.length>0){
+                                $scope.myObj = {
+                                        'padding-top': '15%'
+                                      }
+
+                                    dats['myObj'] =  $scope.myObj
+                            }
+
+                            else{
+
+                                $scope.myObj = {}
+                                dats['myObj'] =  $scope.myObj;
+                            }
+                        })
 
 
                         })
