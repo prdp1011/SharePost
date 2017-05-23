@@ -136,8 +136,8 @@ app.directive('nxEqual', function() {
 app.run(['$rootScope','$http','authSvc',function ($rootScope,$http,authSvc) {
 
 
-
-    if(authSvc.getUserInfo().role!=null) {
+if(authSvc.getUserInfo()) {
+    if (authSvc.getUserInfo().role != null) {
         console.log("rooot", authSvc.getUserInfo().role)
         $http.post('/admin/getNotification', {role: authSvc.getUserInfo().role})
             .then(function (response) {
@@ -152,4 +152,5 @@ app.run(['$rootScope','$http','authSvc',function ($rootScope,$http,authSvc) {
             })
 
     }
+}
 }])
