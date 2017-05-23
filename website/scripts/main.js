@@ -2,6 +2,7 @@
  * Created by JASMINE-j on 5/14/2017.
  */
 'use strict';
+
 app.factory('authSvc', function ($http, $q, $window, apisrv, $rootScope) {
     var self, setAuthHeader, storage_key;
     self = this;
@@ -74,6 +75,7 @@ app.factory('authSvc', function ($http, $q, $window, apisrv, $rootScope) {
         init: self.init
     };
 })
+
 app.controller('loginCtrl', [
     '$scope', '$location', 'authSvc', function ($scope, $location, authSvc) {
         $scope.msg = 'Please login!';
@@ -509,9 +511,8 @@ app.controller('profileCtrl', ['$scope', '$rootScope', '$http', '$window', '$loc
 
 }]);
 
-app.controller('homeCtrl', ['$scope', '$rootScope', '$window', function ($scope, $rootScope, $window) {
+app.controller('homeCtrl', ['$scope', '$rootScope', '$window','$http', function ($scope, $rootScope, $window,$http) {
 
-    console.log("rooot", $rootScope.role)
 
 
 }])

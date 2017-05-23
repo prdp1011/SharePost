@@ -110,6 +110,19 @@ router.post('/getSubCat',function (req,res) {
     })
 
 })
+router.post('/getNotification',function (req,res) {
+
+    Admin.findOne({role:req.body.role
+    },{notification:1},function (err,result) {
+        if(err){
+            app.sendError(req,res,result)
+        }else {
+            console.log(result)
+            app.send(req, res, result)
+        }
+    })
+
+})
 router.post('/notificationLogs',function (req,res) {
 
    Admin.find({role:2
