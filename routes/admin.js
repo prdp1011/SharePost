@@ -140,9 +140,29 @@ router.post('/notificationLogs',function (req,res) {
                         if (err) {
                             app.sendError(req, res, result3)
                         } else {
+                    Admin.find({role:2},function (err,result4) {
+                        if (err) {
+                            app.sendError(req, res, result3)
+                        } else {
 
+                            _.forEach(result3,function (s,key) {
+                                _.forEach(result4,function (k) {
+                                    if((s.userId).toString()==(k._id).toString()){
+                                        console.log("matched")
+                                        result4[key].uploadby=k.shopName
+                                    }
 
+                                })
+
+                            })
                             app.send(req, res, [result1,result2,result3])
+
+
+                        }
+
+                    })
+
+
                         }
                     })
                 }
