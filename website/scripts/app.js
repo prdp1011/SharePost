@@ -208,18 +208,20 @@ app.directive('nxEqual', function() {
 app.run(['$rootScope','$http','authSvc',function ($rootScope,$http,authSvc) {
 
 
-    console.log("rooot", authSvc.getUserInfo().role)
-    $http.post('/admin/getNotification',{role:authSvc.getUserInfo().role})
-        .then(function (response) {
-            if(response.data.isError){
-                console.log("error")
-            }else{
-                console.log(response.data.data)
-                $rootScope.noti=response.data.data.notification
-            }
+
+    if(authSvc.getUserInfo().role!=null) {
+        console.log("rooot", authSvc.getUserInfo().role)
+        $http.post('/admin/getNotification', {role: authSvc.getUserInfo().role})
+            .then(function (response) {
+                if (response.data.isError) {
+                    console.log("error")
+                } else {
+                    console.log(response.data.data)
+                    $rootScope.noti = response.data.data.notification
+                }
 
 
-        })
+            })
 
-
+    }
 }])
