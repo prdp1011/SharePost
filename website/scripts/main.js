@@ -2,6 +2,80 @@
  * Created by JASMINE-j on 5/14/2017.
  */
 'use strict';
+
+app.factory('authSvc', function ($http, $q, $window, apisrv, $rootScope) {
+    var self, setAuthHeader, storage_key;
+    self = this;
+    self.userinfo = null;
+    storage_key = 'ofbuzz';
+    setAuthHeader = function () {
+        return $http.defaults.headers.common['Username'] = self.userinfo.username;
+    };
+    self.onlogin = function (uname, data) {
+        self.userinfo = {
+            username: uname,
+            address: data.address,
+            firstName: data.firstName,
+            emailId: data.emailId,
+            phoneNumber: data.phoneNumber,
+            id: data.id,
+            role: data.role
+        };
+
+        $window.localStorage[storage_key] = JSON.stringify(self.userinfo);
+        return setAuthHeader();
+    };
+    self.init = function () {
+        var storage;
+        console.log('initializing autSrv');
+        if ($window.localStorage[storage_key]) {
+            storage = $window.localStorage[storage_key];
+            self.userinfo = JSON.parse(storage);
+            $rootScope.signFlag = true
+            $rootScope.userinfo = self.userinfo;
+            console.log(self.userinfo);
+            setAuthHeader();
+            console.log('onlogin', self.userinfo.role)
+            $rootScope.role = self.userinfo.role;
+
+            return console.log('loading ... userinfo');
+        } else {
+            $rootScope.signFlag = false
+
+        }
+    };
+    self.login = function (username, password) {
+        var deferred;
+        deferred = $q.defer();
+        $http.get("/users/login?username=" + username + "&password=" + password).then(function (result) {
+            console.log(result);
+            if (result.data.isError) {
+                return deferred.reject(result.data);
+            } else {
+                $rootScope.signFlag = true
+
+                console.log("api data", result.data);
+                self.onlogin(username, result.data.data);
+                $rootScope.role = self.userinfo.role
+                return deferred.resolve(self.userinfo);
+            }
+        });
+        return deferred.promise;
+    };
+    self.getUserInfo = function () {
+        console.log('Getting userinfo');
+        console.log(self.userinfo);
+        return self.userinfo;
+    };
+    self.init();
+    return {
+        login: self.login,
+        getUserInfo: self.getUserInfo,
+        onlogin: self.onlogin,
+        init: self.init
+    };
+})
+
 app.controller('loginCtrl', [
     '$scope', '$location', 'authSvc', function ($scope, $location, authSvc) {
         $scope.msg = 'Please login!';
