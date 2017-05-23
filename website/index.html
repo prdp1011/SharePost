@@ -34,6 +34,7 @@
         <script type="text/javascript" src="scripts/app.js"></script>
         <script type="text/javascript" src="scripts/apis.js"></script>
         <script type="text/javascript" src="scripts/main.js"></script>
+        <script type="text/javascript" src="scripts/controllers/adminController.js"></script>
 
         <!--======================================================================================   -->
     </head>
@@ -49,6 +50,8 @@
         </a>
         <a href="#/" class="brand-logo center"><i class="fa fa-snowflake-o" aria-hidden="true"></i>of Buzz</a>
         <ul class="right hide-on-med-and-down">
+            <li><a href="#!" class="collection-item"><span class="new badge">4</span><i class="fa fa-bell-o" aria-hidden="true"></i>
+            </a></li>
             <li ng-if="!signFlag"><a href="#/signIn">Sign In</a></li>
             <div style="display: inline" ng-controller="logoutCtrl">
             <li ng-if="signFlag"><a ng-click="logout()">Sign Out</a></li>

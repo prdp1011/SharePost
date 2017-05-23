@@ -110,6 +110,34 @@ router.post('/getSubCat',function (req,res) {
     })
 
 })
+router.post('/notificationLogs',function (req,res) {
+
+   Admin.find({role:2
+    },{firstName:1,lastName:1,createdAt:1},function (err,result1) {
+        if(err){
+            app.sendError(req,res,result1)
+        }else {
+            Admin.find({role:3
+            },{firstName:1,lastName:1,createdAt:1},function (err,result2) {
+                if(err){
+                    app.sendError(req,res,result2)
+                }else {
+                    Product.find({
+                    },{},{$sort:{createdAt:-1}},function (err,result3) {
+                        if (err) {
+                            app.sendError(req, res, result3)
+                        } else {
+
+
+                            app.send(req, res, [result1,result2,result3])
+                        }
+                    })
+                }
+            })
+        }
+    })
+
+})
 router.post('/addSubCat',function (req,res) {
 
     Category.update({_id:req.body.id

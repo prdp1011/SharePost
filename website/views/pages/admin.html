@@ -1,17 +1,17 @@
-<div  ng-controller="adminCtrl">
-        <div class="col s12">
-            <ul tabs class="tabs-fixed-width">
-                <li class="tab col s3"><a class="active" href="#test1">DashBoard</a></li>
-                <li class="tab col s3"><a  href="#test2">Shopkeeper</a></li>
-                <li class="tab col s3"><a href="#test3">Consumer</a></li>
-                <li class="tab col s3"><a href="#test4">Edit</a></li>
-<!--                <li class="tab col s3"><a href="#test1">Consumer1</a></li>-->
-            </ul>
-        </div>
+<div ng-controller="adminCtrl">
+    <div class="col s12">
+        <ul tabs class="tabs-fixed-width">
+            <li class="tab col s3"><a class="active" href="#test1">DashBoard</a></li>
+            <li class="tab col s3"><a href="#test2">Shopkeeper</a></li>
+            <li class="tab col s3"><a href="#test3">Consumer</a></li>
+            <li class="tab col s3"><a href="#test4">Categories</a></li>
+            <li class="tab col s3"><a href="#test5">Notifications</a></li>
+            <!--                <li class="tab col s3"><a href="#test1">Consumer1</a></li>-->
+        </ul>
+    </div>
 
 
-
-    <div class="conainer" style="height: 500px;width:50%;margin: auto ">
+    <div class="conainer" style="height: 500px;width:60%;margin: auto ">
         <div id="test1" class="col s12" style="margin-top: 5%">
             <div class="progress" ng-if="chartFlag">
                 <div class="indeterminate"></div>
@@ -20,153 +20,242 @@
         </div>
 
 
+        <div id="test2" class="card col s10 offset-s1" style="">
 
-
-<div id="test2" class="card col s10 offset-s1" style="">
-
- <div class="progress row" ng-if="shopFlag">
+            <div class="progress row" ng-if="shopFlag">
                 <div class="indeterminate"></div>
             </div>
-            <div  class= "col s12" input-field="" >
+            <div class="col s12" input-field="">
                 <h6 class="col s12 l4 offset-l2" style="text-align: center">Select Shopkeeper</h6>
                 <div
-                        class="col s12 l4"  style=" max-width:50%;margin:auto">
-                <select  style="max-width: 20%" ng-model="select.value"  ng-options="value._id as value.shopName for value in select.choices" material-select watch ng-change="loadDetail()">
-                    <!--<option ng-repeat="value._id as valuse.shopName for value in select.choices">{{value}}</option>-->
-                </select></div>
-                
+                        class="col s12 l4" style=" max-width:50%;margin:auto">
+                    <select style="max-width: 20%" ng-model="select.value"
+                            ng-options="value._id as value.shopName for value in select.choices" material-select watch
+                            ng-change="loadDetail()">
+                        <!--<option ng-repeat="value._id as valuse.shopName for value in select.choices">{{value}}</option>-->
+                    </select></div>
+
             </div>
-            <div class = "row"></div>
-                <div class="card-image waves-effect waves-block waves-light" >
-                    <img class="" src="http://res.cloudinary.com/dh5gx0t5p/image/upload/v1495188266/user-profile-bg_hbub9d.jpg" alt="user background" width="" height="233px">                    
-              
-                     </div>
-<!-- <<<<<<<  --><!-- HEAD --><!-- 
+            <div class="row"></div>
+            <div class="card-image waves-effect waves-block waves-light">
+                <img class=""
+                     src="http://res.cloudinary.com/dh5gx0t5p/image/upload/v1495188266/user-profile-bg_hbub9d.jpg"
+                     alt="user background" width="" height="233px">
+
+            </div>
+            <!-- <<<<<<<  --><!-- HEAD --><!--
                  <figure class="card-profile-image" style="position: absolute; margin-top: 21%" >
                     <img src="http://res.cloudinary.com/dh5gx0t5p/image/upload/v1495188263/avatar_oiu9ev.jpg" alt="profile image" class="circle z-depth-2 responsive-img"> -->
-                 <figure class="card-profile-image" style="position: absolute; margin-top: 21%" data-activates='demoDropdown' dropdown>
-                    <img src="" alt="profile image" class="circle z-depth-2 responsive-img">
-                </figure>
-                <ul id='demoDropdown' class='dropdown-content' style="margin-top: 30% ; margin-left: 4%">
-                    <li><a href="javascript:void(0);" >View Photo</a></li>
-                    <li><a href="javascript:void(0);">Upload Photo</a></li>
-                    <li><a href="javascript:void(0);">Remove Photo</a></li>
-                </ul>
-                <div class="card-content">
-                  <div class="row">                    
+            <figure class="card-profile-image" style="position: absolute; margin-top: 21%" data-activates='demoDropdown'
+                    dropdown>
+                <img src="" alt="profile image" class="circle z-depth-2 responsive-img">
+            </figure>
+            <ul id='demoDropdown' class='dropdown-content' style="margin-top: 30% ; margin-left: 4%">
+                <li><a href="javascript:void(0);">View Photo</a></li>
+                <li><a href="javascript:void(0);">Upload Photo</a></li>
+                <li><a href="javascript:void(0);">Remove Photo</a></li>
+            </ul>
+            <div class="card-content">
+                <div class="row">
                     <div class="col l2 s12   center-align">
                         <p style="font-size: 18px" class=" grey-text text-darken-4">{{shop.firstName}}</p>
-                        <p   class="medium-small grey-text">Name</p>
+                        <p class="medium-small grey-text">Name</p>
                     </div>
                     <div class="col l3 s12 center-align">
-                        <p style="font-size: 18px"  class=" grey-text text-darken-4">{{shop.phoneNumber}}</p>
+                        <p style="font-size: 18px" class=" grey-text text-darken-4">{{shop.phoneNumber}}</p>
                         <p class="medium-small grey-text">Phone Number</p>
                     </div>
                     <div class="col l3 s12 center-align">
-                        <p style="font-size: 18px"  class=" grey-text text-darken-4">{{shop.emailId}}</p>
+                        <p style="font-size: 18px" class=" grey-text text-darken-4">{{shop.emailId}}</p>
                         <p class="medium-small grey-text">Email ID</p>
-                    </div>                    
-                    <div class="col l2 s12 center-align">
-                        <p style="font-size: 18px;color: green"  class=" grey-text text-darken-4"><span ng-if="shop.approve==true">Approved</span>
-                        <span ng-if="shop.approve==false" style="color: red">Not Approved</span>
-                        <p class="medium-small grey-text">Status</p>                        
                     </div>
-                      <div class="col l1 s1 center-align">
-                        <p style="font-size: 18px" ><a class="btn btn-floating pulse purple" href="#/pages/eprofile/{{shop._id}}"><i class="material-icons">menu</i></a></p>
+                    <div class="col l2 s12 center-align">
+                        <p style="font-size: 18px;color: green" class=" grey-text text-darken-4"><span
+                                ng-if="shop.approve==true">Approved</span>
+                            <span ng-if="shop.approve==false" style="color: red">Not Approved</span>
+                        <p class="medium-small grey-text">Status</p>
+                    </div>
+                    <div class="col l1 s1 center-align">
+                        <p style="font-size: 18px"><a class="btn btn-floating pulse purple"
+                                                      href="#/pages/eprofile/{{shop._id}}"><i class="material-icons">menu</i></a>
+                        </p>
                     </div>
                     <div class="col s1 l1 " style="margin-top: -10%">
-                      <a class="btn btn-floating pulse activator waves-effect waves-light darken-2 right purple">
-                          <!-- <i class="fa fa-pencil-square-o"></i> -->
-                          <i class="material-icons">edit</i>
-                      </a>
-                    </div>                    
-                   
-                  </div>
-                </div>
-                <div class="card-reveal" style="display: none; transform: translateY(0px);">
-                    <p>
-                      <span class="card-title grey-text text-darken-4"> <i class="fa fa-times" style="float:right"></i></span>
-                    </p>
-<div class="row">
-<div class="col l6 s12 offset-l3">
-            <div input-field="">
-                <input type="text" ng-model="shop.shopName"  length="150">
-                <label>Shop Name</label>
-            </div>
-            <div input-field="" style="display: inline">
-                <input type="text" ng-model="shop.firstName"  length="150">
-                <label>Shopkeeper Name</label>
-            </div>
-            <div input-field="" >
-                <input type="text" ng-model="shop.emailId"  length="150">
-                <label>Email ID</label>
-            </div>
-            <div input-field="">
-                <input type="text" ng-model="shop.phoneNumber"  length="150">
-                <label>Phone Number</label>
-            </div>
-            <div input-field="">
-                <input type="text" ng-model="shop.address1" vs-google-autocomplete vs-latitude="shop.address.lat"
-                         vs-longitude="shop.address.long" id="add-name" type="text" class="validate"  length="150">
-                <label>Address</label>
-            </div>
-                <div class="switch">
-                    <label>
-                        Not Approved
-                        <input type="checkbox" ng-model="shop.approve" ng-change="changeApproval()">
-                        <span class="lever"></span>
-                        Approved
-                    </label>
-                </div>
-                 <div input-field="" >
-                <button class="waves-effect waves-light btn" ng-click="updateProfile()">Submit</button></div>
-        </div>
-        </div>
+                        <a class="btn btn-floating pulse activator waves-effect waves-light darken-2 right purple">
+                            <!-- <i class="fa fa-pencil-square-o"></i> -->
+                            <i class="material-icons">edit</i>
+                        </a>
+                    </div>
+
                 </div>
             </div>
-
-
-    <div id="test3" class="col s12">Test 3</div>
-    <div id="test4" class="col s12" style="width: 50%;margin: auto">
-
-        <div class="col s12">
-            <ul tabs reload="allTabContentLoaded">
-                <li class="tab col s6"><a class="active" href="#cat1">Create</a></li>
-                <li class="tab col s6"><a  href="#cat2">Edit</a></li>
-            </ul>
-        </div>
-        <div id="cat1" class="col s12">
-            <div input-field="">
-                <input type="text" ng-model="create.add1"  length="150">
-                <label>Add Category</label>
+            <div class="card-reveal" style="display: none; transform: translateY(0px);">
+                <p>
+                    <span class="card-title grey-text text-darken-4"> <i class="fa fa-times"
+                                                                         style="float:right"></i></span>
+                </p>
+                <div class="row">
+                    <div class="col l6 s12 offset-l3">
+                        <div input-field="">
+                            <input type="text" ng-model="shop.shopName" length="150">
+                            <label>Shop Name</label>
+                        </div>
+                        <div input-field="" style="display: inline">
+                            <input type="text" ng-model="shop.firstName" length="150">
+                            <label>Shopkeeper Name</label>
+                        </div>
+                        <div input-field="">
+                            <input type="text" ng-model="shop.emailId" length="150">
+                            <label>Email ID</label>
+                        </div>
+                        <div input-field="">
+                            <input type="text" ng-model="shop.phoneNumber" length="150">
+                            <label>Phone Number</label>
+                        </div>
+                        <div input-field="">
+                            <input type="text" ng-model="shop.address1" vs-google-autocomplete
+                                   vs-latitude="shop.address.lat"
+                                   vs-longitude="shop.address.long" id="add-name" type="text" class="validate"
+                                   length="150">
+                            <label>Address</label>
+                        </div>
+                        <div class="switch">
+                            <label>
+                                Not Approved
+                                <input type="checkbox" ng-model="shop.approve" ng-change="changeApproval()">
+                                <span class="lever"></span>
+                                Approved
+                            </label>
+                        </div>
+                        <div input-field="">
+                            <button class="waves-effect waves-light btn" ng-click="updateProfile()">Submit</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button type="button"  class="btn" ng-click="addCat()">Add</button>
-
         </div>
-        <div id="cat2" class="col s12">
-             <span >
-                <select style="width: 20%" ng-model="edit.selectCat"  ng-options="value._id as value.name for value in getData.select" material-select watch ng-change="loadSubCat()">
+
+
+        <div id="test3" class="col s12">Test 3</div>
+        <div id="test4" class="col s12" style="width: 50%;margin: auto">
+
+            <div class="col s12">
+                <ul tabs reload="allTabContentLoaded">
+                    <li class="tab col s6"><a class="active" href="#cat1">Create</a></li>
+                    <li class="tab col s6"><a href="#cat2">Edit</a></li>
+                </ul>
+            </div>
+            <div id="cat1" class="col s12">
+                <div input-field="">
+                    <input type="text" ng-model="create.add1" length="150">
+                    <label>Add Category</label>
+                </div>
+                <button type="button" class="btn" ng-click="addCat()">Add</button>
+
+            </div>
+            <div id="cat2" class="col s12">
+             <span>
+                <select style="width: 20%" ng-model="edit.selectCat"
+                        ng-options="value._id as value.name for value in getData.select" material-select watch
+                        ng-change="loadSubCat()">
                     <!--<option ng-repeat="value._id as valuse.shopName for value in select.choices">{{value}}</option>-->
                 </select></span>
 
-            <div input-field="">
-                <input type="text" ng-model="edit.listText"  length="150">
-                <label>Add Category</label>
-            </div>
-            <button type="button" class="btn " ng-click="editAdd()">Add</button>
+                <div input-field="">
+                    <input type="text" ng-model="edit.listText" length="150">
+                    <label>Add Category</label>
+                </div>
+                <button type="button" class="btn " ng-click="editAdd()">Add</button>
 
-            <table class="responsive-table striped">
-                <thead><tr><th>Sub Category</th></tr></thead>
-                <tbody><tr ng-repeat="data in showList track by $index"><td>{{data}}</td></tr></tbody>
-            </table>
-            <button type="button" class="btn " ng-click="submitNew()">Submit</button>
+                <table class="responsive-table striped">
+                    <thead>
+                    <tr>
+                        <th>Sub Category</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="data in showList track by $index">
+                        <td>{{data}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="btn " ng-click="submitNew()">Submit</button>
+
+            </div>
+        </div>
+        <div id="test5" class="col s12">
+
+        <div class="container">
+            <div class="row col s12 l12">
+                <div class="col s12 l4">
+                 <table class="responsive-table  highlight">
+                     <thead>
+                     <tr>
+                         <th>Shopkeeper Logs</th>
+                     </tr>
+                     </thead>
+                     <tbody>
+                     <tr style="font-size: 14px" ng-repeat="data in shopkeeperLogs">
+                         <td>
+                             {{data.firstName}} {{data.lastName}} is Joined On {{data.createdAt |  date:'mediumDate'}}
+                         </td>
+                     </tr>
+                     </tbody>
+                 </table>
+                </div>
+                <div class="col s12 l4">
+                 <table class="responsive-table  highlight">
+                     <thead>
+                     <tr>
+                         <th>Consumer Logs</th>
+                     </tr>
+                     </thead>
+                     <tbody>
+                     <tr style="font-size: 14px" ng-repeat="data in consumerLogs">
+                         <td>
+                             {{data.firstName}} {{data.lastName}} is Joined On {{data.createdAt |  date:'mediumDate'}}
+                         </td>
+                     </tr>
+                     </tbody>
+                 </table>
+                </div>
+                <div class="col s12 l4 ">
+                    <table class=" responsive-table highlight">
+                     <thead>
+                     <tr>
+                         <th>Product Logs</th>
+                     </tr>
+                     </thead>
+                     <tbody>
+                     <tr style="font-size: 14px" ng-repeat="data in productLogs">
+                         <td>
+                             Name:{{data.name}}
+                             Price:{{data.price}}
+                             Category:{{data.category}}
+                         </td>
+                     </tr>
+                     </tbody>
+                 </table>
+                </div>
+
+            </div>
 
         </div>
+
+        </div>
+
     </div>
 </div>
- 
 
 
+    <style> .card-image {
+        position: absolute;
+    }
 
-  <style> .card-image { position:absolute;  } .card-profile-image { position:absolute; top: 25px; left: 25px; z-index: 2; } </style>
+    .card-profile-image {
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        z-index: 2;
+    } </style>
 
