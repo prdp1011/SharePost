@@ -22,6 +22,7 @@ var userSchema = new Schema({
     address1:String,
     address2:String,
     category:String,
+    notification:Number,
     phoneNumber: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: String,
