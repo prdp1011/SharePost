@@ -1,5 +1,5 @@
 
-<div class="row" ng-controller="eprofileCtrl" style="width: 98%;">
+<div class="row" ng-controller="eprofileCtrl">
     <div class="card" style="width: 80%;margin: auto; margin-top: 2%">
         <div class="card-image waves-effect waves-block waves-light" >
             <img class="" src="http://res.cloudinary.com/dh5gx0t5p/image/upload/v1495188266/user-profile-bg_hbub9d.jpg" alt="user background" width="" height="233px">
@@ -13,7 +13,7 @@
             <li><a href="javascript:void(0);">Upload Photo</a></li>
             <li><a href="javascript:void(0);">Remove Photo</a></li>
         </ul>
-        <div class="card-content">
+        <div class="card-content" >
             <div class="row">
                 <div class="col l2 s12 offset-l2  center-align">
                     <h6 class=" grey-text text-darken-4">{{shopk.shopName}}</h6>
@@ -38,32 +38,35 @@
                 </div>
 
             </div>
-        </div>
+        </div></div>
 
-    </div>
+    
     <div class="progress row" ng-if="shopFlag">
         <div class="indeterminate"></div>
     </div>
-    <div style="width: 50%;margin: auto">
+ 
+    <div style="width:82%; margin: auto;" >
      <div ng-repeat="p in profileProduct" >
-
-         <div class="row col l12 s12">
-             <div class="col s12 l12">
-                 <div class="card">
-                     <div class="card-image ">
-                         <div class="row l12">
-                         <div class="col l3" ng-repeat="i in p.pImages">
-                         <a class="btn-floating activator waves-effect waves-light darken-2 right red" ng-click="removePhoto(i.url,p.id)">
-                             <i class="material-icons">close</i>
-                         </a>
-                         <img  ng-src={{i.url}} style=" height: 80px;width:100px " class="z-depth-3 responsive-img">
-                         </div>
-                         </div>
+         <div class="">
+             <div class="col s12 l6">
+                 <div class="card z-depth-2">
+                     <div class="card-image " style="">
+                            <div class="row">
+                                <div class="col l3 hovereffect" ng-repeat="i in p.pImages">
+                                 <img  ng-src={{i.url}} style="  " class="z-depth-2 responsive-img">
+                                <div  class="overlay">
+                                    <a class="btn-floating activator waves-effect waves-light darken-2 right red" ng-click="removePhoto(i.url,p.id)">
+                                        <i class="material-icons">close</i>
+                                    </a>
+                                </div>
+                                   
+                                </div>
+                            </div>
                      </div>
-                     <div class="card-action">
+                     <div class="card-action" style="font-size: 10px;padding-left: -53%;padding-bottom: 0px;padding-top: 8px;padding-left: 0px;">
                          <div class="row">
                              <div class="col l4 s12   center-align">
-                                 <h6 class=" grey-text text-darken-4">{{p.title}}</h6>
+                                 <h6 class=" grey-text text-darken-3">{{p.title}}</h6>
                                  <p class="medium-small grey-text">Product Name</p>
                              </div>
                              <div class="col l4 s12 center-align">
@@ -75,56 +78,20 @@
                                  <p class="medium-small grey-text">Price</p>
                              </div>
                              <div class="col l1 s1  s11 center-align">
-                                 <p style="font-size: 18px"><a class="btn btn-floating pulse purple"
+                                 <a class="btn btn-floating pulse purple"
                                                                ng-click= "deleteCard(p)"><i class="material-icons">remove</i></a>
-                                 </p>
-                             </div>
+                                                              </div>
                          </div>
                      </div>
                  </div>
              </div>
          </div>
+</div>
+</div>
+</div>
+<style> .card-image { position:absolute;  } .card-profile-image { position:absolute; top: 25px; left: 25px; z-index: 2; } 
 
-        <!--<div class="col s12 l12">-->
-        <!--<div class="card z-depth-2"  >-->
-            <!--<div class="row col l12 s12">-->
-            <!--<div class="card-image" ng-repeat="i in p.pImages">-->
-            <!--<div class="col s12  l2">-->
-             <!--<div class="col s1 l1 offset-s11" style="margin-left: 97%;     margin-bottom: -6%;" >-->
-                      <!--<a class="btn-floating activator waves-effect waves-light darken-2 right red" ng-click="removePhoto(i.url,p.id)">-->
-                          <!--<i class="material-icons">close</i>-->
-                      <!--</a>-->
-                    <!--</div>-->
-                <!--<img  ng-src={{i.url}} style=" height: 80px;width:100px " class="z-depth-3 responsive-img"s>-->
-                <!--</div>-->
-        <!--</div>-->
-            <!--</div>-->
-            <!--<div class="row col l12 s12">-->
-             <!--<div class="card-content" ng-style="p.myObj">-->
-              <!--<div class="row">-->
-                <!--<div class="col l2 s12   center-align">-->
-                    <!--<h6 class=" grey-text text-darken-4">{{p.title}}</h6>-->
-                    <!--<p class="medium-small grey-text">Product Name</p>-->
-                <!--</div>-->
-                <!--<div class="col l2 s12 center-align">-->
-                    <!--<h6 class=" grey-text text-darken-4">{{p.pdata.category}}</h6>-->
-                    <!--<p class="medium-small grey-text">Categoty</p>-->
-                <!--</div>-->
-                <!--<div class="col l2 s12  center-align">-->
-                    <!--<h6 class=" grey-text text-darken-4">{{p.pdata.price}}</h6>-->
-                    <!--<p class="medium-small grey-text">Price</p>-->
-                <!--</div>-->
-                <!--<div class="col l1 s1 offset-l5 s11 center-align">-->
-                        <!--<p style="font-size: 18px"><a class="btn btn-floating pulse purple"-->
-                                                      <!--ng-click= "deleteCard(p)"><i class="material-icons">remove</i></a>-->
-                        <!--</p>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-<!--</div>-->
-</div>
-</div>
-<style> .card-image { position:absolute;  } .card-profile-image { position:absolute; top: 25px; left: 25px; z-index: 2; } </style>
+
+
+</style>
 
