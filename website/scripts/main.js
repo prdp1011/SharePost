@@ -384,22 +384,6 @@ app.controller('eprofileCtrl', ['$scope', '$rootScope', '$http', '$window', '$lo
                     console.log(response.data.data)
                     $scope.profileProduct = response.data.data
 
-                        $scope.profileProduct.forEach(function(dats){
-                                if (dats.pImages.length>0){
-                                $scope.myObj = {
-                                        'padding-top': '15%'
-                                      }
-
-                                    dats['myObj'] =  $scope.myObj
-                            }
-
-                            else{
-
-                                $scope.myObj = {}
-                                dats['myObj'] =  $scope.myObj;
-                            }
-                        })
-
 
                 })
 
@@ -425,23 +409,7 @@ app.controller('eprofileCtrl', ['$scope', '$rootScope', '$http', '$window', '$lo
                             console.log(response.data.data)
                             $scope.profileProduct = response.data.data
 
-                            $scope.profileProduct.forEach(function(dats){
-                                if (dats.pImages.length>0){
-                                $scope.myObj = {
-                                        'padding-top': '15%'
-                                      }
-
-                                    dats['myObj'] =  $scope.myObj
-                            }
-
-                            else{
-
-                                $scope.myObj = {}
-                                dats['myObj'] =  $scope.myObj;
-                            }
-                        })
-
-
+                            
 
                         })
 
@@ -464,21 +432,7 @@ app.controller('profileCtrl', ['$scope', '$rootScope', '$http', '$window', '$loc
             console.log(response.data.data)
             $scope.profileProduct = response.data.data
 
-                $scope.profileProduct.forEach(function(dats){
-                                if (dats.pImages.length>0){
-                                $scope.myObj = {
-                                        'padding-top': '15%'
-                                      }
-
-                                    dats['myObj'] =  $scope.myObj
-                            }
-
-                            else{
-
-                                $scope.myObj = {}
-                                dats['myObj'] =  $scope.myObj;
-                            }
-                        })
+               
 
         })
 
@@ -495,24 +449,6 @@ app.controller('profileCtrl', ['$scope', '$rootScope', '$http', '$window', '$loc
                         .then(function (response) {
                             console.log(response.data.data)
                             $scope.profileProduct = response.data.data
-
-                            $scope.profileProduct.forEach(function(dats){
-                                if (dats.pImages.length>0){
-                                $scope.myObj = {
-                                        'padding-top': '15%'
-                                      }
-
-                                    dats['myObj'] =  $scope.myObj
-                            }
-
-                            else{
-
-                                $scope.myObj = {}
-                                dats['myObj'] =  $scope.myObj;
-                            }
-                        })
-
-
                         })
 
                 }
@@ -522,6 +458,25 @@ app.controller('profileCtrl', ['$scope', '$rootScope', '$http', '$window', '$loc
 
 
     }
+        var datatoBeSend = {};
+    $scope.removeChangeBackground=function(arg1){
+       
+        var datatoBeSend = {
+            'id': arg1.id,
+            type: 0 
+        }
+             console.log(datatoBeSend)
+
+    }
+     $scope.uploadProfilePic=function(arg){
+        var datatoBeSendProfile = {
+            'id': arg.id,
+            type:1
+        }
+             console.log(datatoBeSendProfile);
+
+    }
+    
     console.log("asdkhasl")
 
 

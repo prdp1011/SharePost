@@ -111,7 +111,7 @@ nav.nav-extended {
 }
 .hovereffect  img{
 
-    height:83px!important;
+    
    
 }
 .hovereffect .overlay {
@@ -133,6 +133,20 @@ nav.nav-extended {
     transition:all .4s linear;
 }
 
+.hovereffect h2 {
+	text-transform:uppercase;
+	color:#fff;
+	text-align:center;
+	position:relative;
+	font-size:11px;
+	background:rgba(0,0,0,0.6);
+	-webkit-transform:translatey(-100px);
+	-ms-transform:translatey(-100px);
+	transform:translatey(-100px);
+	-webkit-transition:all .2s ease-in-out;
+	transition:all .2s ease-in-out;
+	padding:10px;
+}
 .hovereffect a.info {
     text-decoration:none;
     display:inline-block;
