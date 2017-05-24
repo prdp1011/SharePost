@@ -167,23 +167,25 @@ app.controller('adminCtrl', ['$scope', '$rootScope', '$http', '$window', '$locat
             })
     }
         $scope.arrMemberAdded= [];
+        $scope.arrMemberAdded1= [];
 
-
+    $scope.loadContact=function(){
     $http.post('/admin/getNumber',$scope.arrMemberAdded)
         .then(function (response) {
             $scope.arrMemberAdded=response.data.data
         })
-
+    }
+    $scope.loadContact();
        $scope.addNewMember = function(){
             console.log($scope.dataM)
-                $scope.arrMemberAdded.push($scope.dataM);
+                $scope.arrMemberAdded1.push($scope.dataM);
                 $scope.dataM={}
        }
         $scope.submitMemArr=function(){
             console.log($scope.arrMemberAdded);
-           $http.post('/admin/addNumber',$scope.arrMemberAdded)
+           $http.post('/admin/addNumber',$scope.arrMemberAdded1)
                .then(function (response) {
-
+                        $scope.loadContact();
                })
 
         }
