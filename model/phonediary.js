@@ -11,6 +11,8 @@ var async=require('async')
 var phoneDiarySchema = new Schema({
     name:String,
     number:{type:'string'},
+    Cat:{type:'string'},
+    subCat:{type:'string'},
     updatedAt:'Date',
     createdAt:'Date'
 });

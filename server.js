@@ -28,6 +28,7 @@ cloudinary.config({
 //---------------------------models------------------------------------
 Admin = require('./model/Users');
 Product = require('./model/products');
+DiaryCategories = require('./model/diaryCategories');
 Otp = require('./model/Otp');
 Category = require('./model/categories');
 Phonediary = require('./model/phonediary');

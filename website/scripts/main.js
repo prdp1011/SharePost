@@ -495,8 +495,20 @@ app.controller('phoneDiaryCtrl',['$scope', '$rootScope', '$window','$http', func
 
 
 
-
+$scope.dataM={}
+$scope.filterData=''
     $scope.Search=''
+
+
+    $http.post('/admin/getDcat')
+        .then(function (response) {
+            if(response.data.isError){
+                alert("error")
+            }else{
+                $scope.loadMe=response.data.data
+            }
+
+        })
     $http.post('/admin/getNumber')
         .then(function (response) {
 
@@ -505,6 +517,12 @@ app.controller('phoneDiaryCtrl',['$scope', '$rootScope', '$window','$http', func
 
         })
 
+
+    $scope.filterCat=function () {
+
+        $scope.filterData=$scope.dataM.cat
+
+    }
 }])
 
 app.controller('homeCtrl', ['$scope', '$rootScope', '$window','$http', function ($scope, $rootScope, $window,$http) {

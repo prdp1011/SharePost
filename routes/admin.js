@@ -205,7 +205,8 @@ console.log(req.body)
     var response=[]
 async.each(req.body,function (item,callback) {
 
-    Phonediary.create({name:item.name,number:item.number},function (err,result) {
+    Phonediary.create({name:item.name,number:item.number,Cat:item.cat,
+    subCat:item.sub},function (err,result) {
         response.push(result)
         callback()
     })
@@ -223,5 +224,31 @@ Phonediary.find({},function (err,result) {
     }
 })
 })
+
+router.post('/saveDcat',function (req,res) {
+
+    async.each(req.body.array,function (item,callback) {
+        DiaryCategories.create(item, function (err, result) {
+        callback()
+        })
+    },function (done) {
+
+app.send(req,res,"done")
+    })
+
+})
+
+router.post('/getDcat',function (req,res) {
+    DiaryCategories.find({},function (err,result) {
+
+        if(err){app.sendError(req,res,"err",err)
+        }else {
+
+            app.send(req,res,result)
+        }
+
+    })
+})
+
 
 module.exports = router;

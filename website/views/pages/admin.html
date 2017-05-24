@@ -4,9 +4,9 @@
             <li class="tab col s3"><a ng-class='{"active":isButtonActive==false}'href="#test1">DashBoard</a></li>
             <li class="tab col s3"><a href="#test2">Shopkeeper</a></li>
             <li class="tab col s3"><a href="#test3">Consumer</a></li>
-            <li class="tab col s3"><a href="#test4">Categories</a></li>
+            <li class="tab col s3"><a href="#test4">Reg.Category</a></li>
             <li class="tab col s3"><a ng-class='{"active":isButtonActive==true}' href="#test5">Notifications</a></li>
-            <li class="tab col s3"><a href="#test6">Add Numbers</a></li>
+            <li class="tab col s3"><a href="#test6">Phone Diary</a></li>
         </ul>
     </div>
 
@@ -238,25 +238,47 @@
         </div>
 
 <div id="test6" class="row" style="margin-top: 5%">
-   <div class="col s12 l12 ">
 
-<div class="center">
+
+    <div class="col s12">
+        <ul tabs class="tabs-fixed-width">
+            <li class="tab col s3 active"><a href="#test13">Add Numbers</a></li>
+            <li class="tab col s3"><a href="#test14">Categories</a></li>
+        </ul>
+    </div>
+
+
+<div id="test13">
+   <div  class="col s12 l12 ">
+<div  class="center">
     <a class='btn' ng-click="arrMemberAdded1=[]" data-target='demoModal'  modal>Add New</a>
 </div>
 <!-- Modal Structure -->
 <div id="demoModal" class="modal">
  <form class="form-register" method="post" name="addNew" ng-submit="signUp()" novalidate >
     <div class="modal-content">
-    <div input-field="" class="col s12 l5">
+    <div input-field="" class="col s12 l3">
         <input type="text"   ng-model="dataM.name" required>
         <label>Name</label>
     </div>
-    <div input-field="" class="col s12 l5">
+    <div input-field="" class="col s12 l3">
         <input type="text" maxlength="15" ng-model="dataM.number"  required>
         <label>Number</label>
     </div>
-    <div class="col s12 l2"  style="margin-top: 4%;">
-        <a  class=" modal-action waves-effect waves-green btn" ng-disabled="addNew.$invalid"ng-click="addNewMember()" >Add</a>
+        <div input-field="" class="col s12 l3">
+            <select class="" ng-model="dataM.cat" ng-options="value as value.category for value in loadMe" material-select watch ng-change="changebank()">
+                <!--<option ng-repeat="value in loadMe">{{value.category}}</option>-->
+            </select>
+        </div>
+        <div input-field="" class="col s12 l2">
+            <select class="" ng-model="dataM.sub" material-select watch>
+                <option ng-repeat="value in subBank ">{{value.subcategory}}</option>
+            </select>
+        </div>
+    <div class="col s12 l1"  style="margin-top: 4%;">
+        <a class="btn-floating btn-large waves-effect waves-light red" ng-disabled="addNew.$invalid" ng-click="addNewMember()" ><i class="material-icons">add</i></a>
+
+        <!--<a  class=" modal-action waves-effect waves-green btn" ng-disabled="addNew.$invalid"ng-click="addNewMember()" >Add</a>-->
         </div>
     </div>
       <div class="col s12 l12">
@@ -266,6 +288,8 @@
                   <tr >
                       <th>Name</th>
                       <th>Number</th>
+                      <th>Category</th>
+                      <th>Sub Category</th>
                       <th>Edit</th>
                   </tr>
                 </thead>
@@ -274,6 +298,8 @@
                   <tr ng-repeat=" i in arrMemberAdded1">
                     <td>{{i.name}}</td>
                     <td>{{i.number}}</td>
+                    <td>{{i.cat}}</td>
+                    <td>{{i.sub}}</td>
                     <td><a  class=" waves-effect waves-green btn btn-floating" ng-click="editNewC($index, i)" ><i class="material-icons">edit</i></a></td>
                   </tr>
                 </tbody>
@@ -286,7 +312,7 @@
     <div class="modal-footer col s12 l12 ">
         <a  class=" modal-action  modal-close waves-effect waves-green btn" ng-disabled="!arrMemberAdded1.length" ng-click="submitMemArr()">Submit</a>
     </div>
-</div>
+ </form></div>
 </div>
    <div class="col s12 l12">
        <div class="responsive-table ">
@@ -296,6 +322,8 @@
           <tr >
               <th>Name</th>
               <th>Number</th>
+              <th>Category</th>
+              <th>Sub Category</th>
           </tr>
         </thead>
 
@@ -303,6 +331,8 @@
           <tr ng-repeat=" i in arrMemberAdded">
             <td>{{i.name}}</td>
             <td>{{i.number}}</td>
+            <td>{{i.Cat}}</td>
+            <td>{{i.subCat}}</td>
           </tr>
         </tbody>
       </table>
@@ -313,7 +343,33 @@
 </div>
 
        
-   </div> </div>
+   </div>
+</div>
+<div id="test14" >
+    <h5 class="margin-bottom">Create Categories</h5>
+
+    <div ng-repeat="cati in categories">
+        <div class="input-group">
+            <a class="btn red" ng-click="removeItem($index)"><i class="material-icons">remove</i></a>
+            <a class="btn green" ng-if="cati.subcategories.length>0" ng-click="cati.subcategories.push({'subcategory':''})"><i class="material-icons">add</i></a>
+            <a ng-if="!cati.subcategories"  class="btn green" ng-click="cati.subcategories=[{'subcategory':''}]"><i class="material-icons">add</i></a>
+            <div style="display: inline;width: 30%" input-field="">
+                <input style="display: inline;width: 30%" type="text" ng-model="cati.category"  ng-change="activateSave()">
+                <label>Add Category</label>
+            </div>
+        </div>
+        <div class="input-group subs" ng-repeat="sub in cati.subcategories">
+            <a class=" btn cyan" ng-click="removeSub(cati,$index)"><i class="material-icons">remove</i></a>
+            <div input-field="">
+                <input style="display: inline;width: 30%" type="text" ng-model="sub.subcategory" ng-change="activateSave()">
+                <label>Add Sub Category</label>
+            </div>
+        </div>
+    </div>
+
+    <a class="btn purple" ng-click="categories.push({'category':''})"><i class="material-icons">subject</i></a>
+
+    <a class="btn blue" ng-click="saveScope()" ng-show="saveState"><i class="material-icons">send</i></a>
 </div>   
 </div>
 

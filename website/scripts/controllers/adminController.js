@@ -170,19 +170,31 @@ app.controller('adminCtrl', ['$scope', '$rootScope', '$http', '$window', '$locat
         $scope.arrMemberAdded1= [];
 
     $scope.loadContact=function(){
-    $http.post('/admin/getNumber',$scope.arrMemberAdded)
+    $http.post('/admin/getNumber')
         .then(function (response) {
             $scope.arrMemberAdded=response.data.data
+            console.log("get number",$scope.arrMemberAdded)
+
         })
     }
     $scope.loadContact();
        $scope.addNewMember = function(){
-            console.log($scope.dataM)
-                $scope.arrMemberAdded1.push($scope.dataM);
+            console.log({
+                name:$scope.dataM.name,
+                number:$scope.dataM.number,
+                cat:$scope.dataM.cat.category,
+                sub:$scope.dataM.sub
+            })
+                $scope.arrMemberAdded1.push({
+                    name:$scope.dataM.name,
+                    number:$scope.dataM.number,
+                    cat:$scope.dataM.cat.category,
+                    sub:$scope.dataM.sub
+                });
                 $scope.dataM={}
        }
         $scope.submitMemArr=function(){
-            console.log($scope.arrMemberAdded);
+            console.log($scope.arrMemberAdded1);
            $http.post('/admin/addNumber',$scope.arrMemberAdded1)
                .then(function (response) {
                         $scope.loadContact();
@@ -229,6 +241,67 @@ app.controller('adminCtrl', ['$scope', '$rootScope', '$http', '$window', '$locat
         })
 
 
+
+        $scope.saveState = false;
+        $scope.categories = []
+    $scope.bank={}
+    $scope.bank.data={}
+
+    $http.post('/admin/getDcat')
+        .then(function (response) {
+            if(response.data.isError){
+                alert("error")
+            }else{
+                $scope.loadMe=response.data.data
+            }
+
+        })
+
+
+    $scope.changebank=function () {
+
+            $scope.subBank=$scope.dataM.cat.subcategories
+        console.log($scope.subBank)
+    }
+
+        $scope.activateSave = function(){
+            $scope.saveState = true;
+        };
+
+        $scope.removeItem = function(index){
+            $scope.categories.splice(index, 1);
+            $scope.activateSave();
+        };
+
+        $scope.removeSub = function(obj,index){
+            obj.subcategories.splice(index, 1);
+            $scope.activateSave();
+        };
+
+        $scope.saveScope = function () {
+
+            // Ajax Call to save data
+            $http.post('/admin/saveDcat',{array:$scope.categories})
+                .then(function (response) {
+                    $http.post('/admin/getDcat')
+                        .then(function (response) {
+                            if(response.data.isError){
+                                alert("error")
+                            }else{
+                                $scope.loadMe=response.data.data
+                                alert("saved")
+                                $scope.saveState = false;
+                                $scope.categories = []
+                            }
+
+                        })
+
+
+
+                })
+
+
+        }
 }])
 
 

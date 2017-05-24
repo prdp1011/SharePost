@@ -50,6 +50,25 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 nav.nav-extended {
     height: 250px;
 }
@@ -189,5 +208,33 @@ nav.nav-extended {
 }
 
 
+
+
+
+
+
+/*---------------------cat-----------------------*/
+.subs {
+    margin-left: 20px;
+}
+
+.input-group {
+    margin-bottom: 8px;
+}
+
+input[type=text].form-control,
+.input-group span{
+    border:0;
+    width: auto;
+}
+.input-group span {
+    background: #304454;
+    color: #fff;
+    cursor:pointer;
+}
+.input-group .addsub {
+    background: #8DC7A0!important;
+    color: #fff;
+}
 
 
