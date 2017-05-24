@@ -459,25 +459,66 @@ app.controller('profileCtrl', ['$scope', '$rootScope', '$http', '$window', '$loc
 
     }
         var datatoBeSend = {};
-    $scope.removeChangeBackground=function(arg1){
+    $scope.picChangeBackground=function(arg1,file, errFiles){
        
         var datatoBeSend = {
             'id': arg1.id,
             type: 0 
         }
              console.log(datatoBeSend)
+             console.log($scope.bgImageUrl)
+            $scope.uploadFiles(datatoBeSend, file, errFiles)
 
     }
-     $scope.uploadProfilePic=function(arg){
+     $scope.uploadProfilePic=function(arg, file, errFiles){
         var datatoBeSendProfile = {
             'id': arg.id,
             type:1
         }
              console.log(datatoBeSendProfile);
+             $scope.uploadFiles(datatoBeSendProfile, file, errFiles)
 
     }
     
-    console.log("asdkhasl")
+
+
+ $scope.uploadFiles = function(arg, file, errFiles) {
+        $scope.datatoBeSendProfile = {
+            'file' : file,
+            'type':arg.type,
+            'id' : arg.id
+        };
+
+        console.log( $scope.datatoBeSendProfile);
+        $scope.errFile = errFiles && errFiles[0];
+        if (file) {
+            file.upload = Upload.upload({
+                url: '/upload',
+                arrayKey: '',
+                data:  $scope.datatoBeSendProfile
+            });
+
+            file.upload.then(function (response) {
+                $timeout(function () {
+                    file.result = response.data;
+                    console.log(file.result)
+                });
+            }, function (response) {
+
+                console.log(response)
+                if (response.status > 0)
+                    $scope.errorMsg = response.status + ': ' + response.data;
+            }, function (evt) {
+                file.progress = Math.min(100, parseInt(100.0 * 
+                                         evt.loaded / evt.total));
+            });
+        }
+
+        console.log(file)   
+    }
+
+
+
 
 
 }]);
