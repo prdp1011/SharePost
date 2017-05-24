@@ -191,7 +191,10 @@ app.controller('adminCtrl', ['$scope', '$rootScope', '$http', '$window', '$locat
         }
 
 
-
+        $scope.editNewC = function(i , obj){
+             $scope.dataM = obj;
+               var a = $scope.arrMemberAdded1.splice(i, 1);
+        }
 
     $scope.editAdd = function () {
         $scope.newList.push($scope.edit.listText)
