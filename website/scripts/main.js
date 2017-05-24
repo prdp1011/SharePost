@@ -19,7 +19,8 @@ app.factory('authSvc', function ($http, $q, $window, apisrv, $rootScope) {
             emailId: data.emailId,
             phoneNumber: data.phoneNumber,
             id: data.id,
-            role: data.role
+            role: data.role,
+            approved:data.approved
         };
 
         $window.localStorage[storage_key] = JSON.stringify(self.userinfo);
@@ -35,10 +36,10 @@ app.factory('authSvc', function ($http, $q, $window, apisrv, $rootScope) {
             $rootScope.userinfo = self.userinfo;
             console.log(self.userinfo);
             setAuthHeader();
-            console.log('onlogin', self.userinfo.role)
+            console.log('onlogin', self.userinfo.approved)
             $rootScope.role = self.userinfo.role;
-
-            return console.log('loading ... userinfo');
+            $rootScope.approved = self.userinfo.approved;
+            console.log('loading ... userinfo');
         } else {
             $rootScope.signFlag = false
 
@@ -57,6 +58,7 @@ app.factory('authSvc', function ($http, $q, $window, apisrv, $rootScope) {
                 console.log("api data", result.data);
                 self.onlogin(username, result.data.data);
                 $rootScope.role = self.userinfo.role
+                $rootScope.approved = self.userinfo.approved
                 return deferred.resolve(self.userinfo);
             }
         });

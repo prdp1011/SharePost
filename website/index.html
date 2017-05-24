@@ -65,7 +65,7 @@
    <li >
     <ul class="collection">
         <li class="collection-item" ng-if="!signFlag"><a href="#/otpAdmin"><i class="fa fa-user-circle " aria-hidden="true"></i>Registration</a></li>
-        <li class="collection-item" ng-if="role==2"><a href="#/uploadPro"><i class="fa fa-user-circle" aria-hidden="true"></i>Product Upload</a></li>
+        <li class="collection-item" ng-if="role==2&&approved==1"><a href="#/uploadPro"><i class="fa fa-user-circle" aria-hidden="true"></i>Product Upload</a></li>
         <li class="collection-item" ng-if="role==1"><a href="#/pages/admin"><i class="fa fa-user-circle" aria-hidden="true"></i>Admin Dashboard</a></li>
         <li class="collection-item" ng-if="role==2"><a href="#/profile"><i class="fa fa-user-circle" aria-hidden="true"></i>Profile</a></li>
         <li ng-if="!signFlag"><a href="#/signIn">Sign In</a></li>

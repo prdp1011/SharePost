@@ -26,7 +26,7 @@ var userSchema = new Schema({
     phoneNumber: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: String,
-    approved: Number,
+    approved: {type:'number',default:0},
     lat: String,
     long: String,
     createdAt: Date,

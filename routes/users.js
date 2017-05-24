@@ -27,7 +27,8 @@ router.get('/login', function (req, res) {
                 address:result.address1,
                 phoneNumber: result.phoneNumber,
                 id:result._id,
-                role:result.role
+                role:result.role,
+                approved:result.approved
             };
             console.log({isError: false, data: profile})
             app.send(req, res, profile)
