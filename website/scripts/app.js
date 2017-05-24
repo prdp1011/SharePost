@@ -91,7 +91,7 @@ blacklist.forEach(function(route) {
  $routeProvider.when('/',{templateUrl:'views/pages/home.html'})
      .when('/otpAdmin', {
     templateUrl: 'views/pages/otp.html'
-}).when('/signupAdmin', {
+}).when('/signupAdmin/:phone', {
     templateUrl: 'views/pages/signup.html'
 }).when('/pages/eprofile/:id', {
     templateUrl: 'views/pages/aeditProfile.html'
@@ -99,6 +99,8 @@ blacklist.forEach(function(route) {
     templateUrl: 'views/pages/signIn.html'
 }).when('/uploadPro', {
     templateUrl: 'views/pages/uploadProduct.html'
+}).when('/phoneNumber', {
+    templateUrl: 'views/pages/impNumber.html'
 }).when('/profile', {
     templateUrl: 'views/pages/profile.html'
 }).when('/404', {
@@ -136,21 +138,24 @@ app.directive('nxEqual', function() {
 app.run(['$rootScope','$http','authSvc',function ($rootScope,$http,authSvc) {
 
 
-if(authSvc.getUserInfo()) {
-    if (authSvc.getUserInfo().role != null) {
-        console.log("rooot", authSvc.getUserInfo().role)
-        $http.post('/admin/getNotification', {role: authSvc.getUserInfo().role})
-            .then(function (response) {
-                if (response.data.isError) {
-                    console.log("error")
-                } else {
-                    console.log(response.data.data)
-                    $rootScope.noti = response.data.data.notification
-                }
+    $rootScope.isButtonActive=false
+
+    if (authSvc.getUserInfo()) {
+        if (authSvc.getUserInfo().role != null) {
+            console.log("rooot", authSvc.getUserInfo().role)
+            $http.post('/admin/getNotification', {role: authSvc.getUserInfo().role})
+                .then(function (response) {
+                    if (response.data.isError) {
+                        console.log("error")
+                    } else {
+                        console.log(response.data.data)
+                        $rootScope.noti = response.data.data.notification
+                    }
 
 
-            })
+                })
+
+        }
 
     }
-}
 }])
