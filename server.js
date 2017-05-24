@@ -12,6 +12,8 @@ var expressJwt = require('express-jwt');
 var cloudinary = require('cloudinary');
 var secret = 'this is the secret secret secret 12356';
 var twilio = require('twilio');
+var del = require('del');
+
 var fs = require('fs'),
     http = require('http'),
     https = require('https');
@@ -28,6 +30,7 @@ Admin = require('./model/Users');
 Product = require('./model/products');
 Otp = require('./model/Otp');
 Category = require('./model/categories');
+Phonediary = require('./model/phonediary');
 
 //-----------------------------routes----------------------------------
 var Users = require('./routes/users');
@@ -142,8 +145,12 @@ app.post('/upload', function(req, res) {
                      }, function (err, s) {
                          if (err) console.log(err)
 
-                         app.send(req, res, s)
-                         console.log("database uploaded")
+                         del(['uploads/*.jpeg','uploads/*.jpg', 'uploads/*.png', '!uploads/*.txt']).then(function(paths) {
+                             console.log('Deleted files and folders:\n', paths.join('\n'));
+                             app.send(req, res, s)
+                             console.log("database uploaded")
+                     });
+
                      })
 
              })

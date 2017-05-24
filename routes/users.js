@@ -68,7 +68,7 @@ router.post('/sendOtp',function (req,res) {
                     var query={
                         otp : getOtp,
                         phoneNumber : req.body.phoneNumber,
-                        message:"Your Otp is -"+getOtp,
+                        message:"Your Otp is :"+getOtp,
                         used:0
                     }
 
@@ -136,16 +136,15 @@ Admin.findOne({phoneNumber:query.phoneNumber},function (err,resAdmin) {
         app.sendError(req,res,"Phone Number already registered",resAdmin)
     }else{
         Admin.create(query,function(err,response){
-            app.send(req,res,response)
+            Admin.update({role:1},{$inc:{notification:1}},function (err,response2) {
+                app.send(req,res,response)
+
+            })
+
 
         })
     }
 })
-
-
-
-
-
 
 });
 
