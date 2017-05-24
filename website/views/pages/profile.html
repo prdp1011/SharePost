@@ -4,7 +4,7 @@
 					<div class="card-image waves-effect waves-block waves-light hovereffect" >
 	                    <img class="" src="http://res.cloudinary.com/dh5gx0t5p/image/upload/v1495188266/user-profile-bg_hbub9d.jpg" alt="user background" width="" height="233px">                    
 	              			<div  class="overlay">
-                                    <a class="btn-floating activator waves-effect waves-light darken-2 right green" ng-click="removeChangeBackground(shop)" style="margin-top: 1%; margin-right: 1%">
+                                    <a class="btn-floating activator waves-effect waves-light darken-2 right green" ngf-select="picChangeBackground(shop,$file, $invalidFiles)" style="margin-top: 1%; margin-right: 1%" type="file">
                                         <i class="material-icons">edit</i>
                                     </a>
                                 </div>
@@ -14,7 +14,7 @@
                     <img ng-src="http://res.cloudinary.com/dh5gx0t5p/image/upload/v1495188263/avatar_oiu9ev.jpg" alt="profile image" class="circle z-depth-2 responsive-img">
                 </figure>
                 <ul id='demoDropdown' class='dropdown-content' style="margin-top: 20% ; margin-left: 4%">
-                    <li><a ng-click="uploadProfilePic(shop)">Upload Photo</a></li>
+                    <li><a type="file" ngf-select="uploadProfilePic(shop , $file, $invalidFiles)">Upload Photo</a></li>
                 </ul>
         <div class="card-content">
 	          <div class="row">                    
@@ -35,7 +35,9 @@
 	            	<h6 class=" grey-text text-darken-4">{{shop.address}}</h6></span>
 	                <p class="medium-small grey-text">Address</p>                       
 	            </div>
-	            <div class="col l2 center-align"></div>
+	            <div class="col l2 center-align">
+	            	
+	            </div>
 	          </div>
           </div>
 
@@ -54,7 +56,7 @@
                                 <div class="col l3 hovereffect" ng-repeat="i in p.pImages">
                                  <img  ng-src={{i.url}} style=" height:83px!important; " class="z-depth-2 responsive-img">
                                 <div  class="overlay">
-                                    <a class="btn-floating activator waves-effect waves-light darken-2 right red" ng-click="removePhoto(i.url,p.id)">
+                                    <a class="btn-floating activator waves-effect waves-light darken-2 right red" ng-click="removePhoto(i.url,p.id)" >
                                         <i class="material-icons">close</i>
                                     </a>
                                 </div>
