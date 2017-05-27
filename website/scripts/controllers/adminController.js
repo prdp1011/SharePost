@@ -109,6 +109,33 @@ app.controller('adminCtrl', ['$scope', '$rootScope', '$http', '$window', '$locat
     }
 
 
+    $scope.removeCat=function (p) {
+
+        console.log(p)
+        $http.post('/admin/removeCat',{id:p._id})
+            .then(function (response) {
+                if(response.data.isError){
+                    Materialize.toast('error in deletion',4000)
+                }else{
+                    $http.post('/admin/getCat', {name: $scope.create.add1})
+                        .then(function (response) {
+                            if (!response.data.isError) {
+                                console.log("mera data", response.data.data)
+                                $scope.getData.select = response.data.data
+                                Materialize.toast('Category Deleted',4000)
+
+                            }
+
+                        })
+
+                }
+
+            })
+        
+    }
+    
+    
+    
     $scope.updateProfile = function () {
 
         console.log("done update", $scope.shop)
@@ -126,7 +153,7 @@ app.controller('adminCtrl', ['$scope', '$rootScope', '$http', '$window', '$locat
         $http.post('/admin/addCat', {name: $scope.create.add1})
             .then(function (response) {
                 if (!response.data.isError) {
-                    alert("added")
+                    Materialize.toast("Category Added ",3000)
                     console.log(response.data)
                     $scope.create.add1 = ''
                     $http.post('/admin/getCat', {name: $scope.create.add1})
@@ -256,6 +283,32 @@ app.controller('adminCtrl', ['$scope', '$rootScope', '$http', '$window', '$locat
             }
 
         })
+
+
+    $scope.removeDCat=function(s){
+
+    $http.post('/admin/removeDCat',{id:s._id})
+        .then(function (response) {
+            if(response.data.isError){
+                Materialize.toast('error in removing',3000)
+            }else{
+                $http.post('/admin/getDcat')
+                    .then(function (response) {
+                        if(response.data.isError){
+                            alert("error")
+                        }else{
+                            $scope.loadMe=response.data.data
+                            Materialize.toast('Removed',3000)
+
+                        }
+
+                    })
+
+            }
+        })
+
+
+    }
 
 
     $scope.changebank=function () {

@@ -251,4 +251,32 @@ router.post('/getDcat',function (req,res) {
 })
 
 
+
+
+router.post('/removeCat',function (req,res) {
+
+    Category.remove({_id:req.body.id},function (err,result) {
+        if(err){
+            app.sendError(req,res,"error in deletion",err)
+        }else{
+            app.send(req,res,result)
+        }
+
+    })
+})
+
+
+router.post('/removeDCat',function (req,res) {
+
+    DiaryCategories.remove({_id:req.body.id},function (err,result) {
+        if(err){
+            app.sendError(req,res,"error in deletion",err)
+        }else{
+            app.send(req,res,result)
+        }
+
+    })
+})
+
+
 module.exports = router;

@@ -38,13 +38,13 @@
             </div>
             <div class="row"></div>
            <div class="card-image waves-effect waves-block waves-light " >
-                        <img class="" src="http://res.cloudinary.com/dh5gx0t5p/image/upload/v1495188266/user-profile-bg_hbub9d.jpg" alt="user background" width="" height="233px">                    
+                        <img class="" src={{shop.pic}} alt="user background" width="" height="233px">
                             
                         
                      </div>
-            <figure class="card-profile-image" style="position: absolute; margin-top: 21%" '
+            <figure class="card-profile-image" style="position: absolute; margin-top: 25%"
                     dropdown>
-                <img ng-src="" alt="profile image" class="circle z-depth-2 responsive-img">
+                <img  height="150px" width="150px" ng-src={{shop.backPic}} alt="profile image" class="circle z-depth-2 responsive-img">
             </figure>
             
             <div class="card-content">
@@ -143,6 +143,26 @@
                     <label>Add Category</label>
                 </div>
                 <button type="button" class="btn" ng-click="addCat()">Add</button>
+                <br>
+                <br>
+                <div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Categories</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="l in getData.select ">
+                            <td>{{l.name}}</td>
+                            <td><button class="btn" ng-click="removeCat(l)" >Remove</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
 
             </div>
             <div id="cat2" class="col s12">
@@ -250,6 +270,9 @@
 
 <div id="test13">
    <div  class="col s12 l12 ">
+       <br>
+       <br>
+
 <div  class="center">
     <a class='btn' ng-click="arrMemberAdded1=[]" data-target='demoModal'  modal>Add New</a>
 </div>
@@ -347,29 +370,54 @@
 </div>
 <div id="test14" >
     <h5 class="margin-bottom">Create Categories</h5>
+    <div class="row l12">
+        <div class="col l6">
+            <div ng-repeat="cati in categories">
+                <div class="input-group">
+                    <a class="btn red" ng-click="removeItem($index)"><i class="material-icons">remove</i></a>
+                    <a class="btn green" ng-if="cati.subcategories.length>0" ng-click="cati.subcategories.push({'subcategory':''})"><i class="material-icons">add</i></a>
+                    <a ng-if="!cati.subcategories"  class="btn green" ng-click="cati.subcategories=[{'subcategory':''}]"><i class="material-icons">add</i></a>
+                    <div style="display: inline;width: 30%" input-field="">
+                        <input style="display: inline;width: 30%" type="text" ng-model="cati.category"  ng-change="activateSave()">
+                        <label>Add Category</label>
+                    </div>
+                </div>
+                <div class="input-group subs" ng-repeat="sub in cati.subcategories">
+                    <a class=" btn cyan" ng-click="removeSub(cati,$index)"><i class="material-icons">remove</i></a>
+                    <div input-field="">
+                        <input style="display: inline;width: 30%" type="text" ng-model="sub.subcategory" ng-change="activateSave()">
+                        <label>Add Sub Category</label>
+                    </div>
+                </div>
+            </div>
 
-    <div ng-repeat="cati in categories">
-        <div class="input-group">
-            <a class="btn red" ng-click="removeItem($index)"><i class="material-icons">remove</i></a>
-            <a class="btn green" ng-if="cati.subcategories.length>0" ng-click="cati.subcategories.push({'subcategory':''})"><i class="material-icons">add</i></a>
-            <a ng-if="!cati.subcategories"  class="btn green" ng-click="cati.subcategories=[{'subcategory':''}]"><i class="material-icons">add</i></a>
-            <div style="display: inline;width: 30%" input-field="">
-                <input style="display: inline;width: 30%" type="text" ng-model="cati.category"  ng-change="activateSave()">
-                <label>Add Category</label>
-            </div>
+            <a class="btn purple" ng-click="categories.push({'category':''})"><i class="material-icons">subject</i></a>
+
+            <a class="btn blue" ng-click="saveScope()" ng-show="saveState"><i class="material-icons">send</i></a>
         </div>
-        <div class="input-group subs" ng-repeat="sub in cati.subcategories">
-            <a class=" btn cyan" ng-click="removeSub(cati,$index)"><i class="material-icons">remove</i></a>
-            <div input-field="">
-                <input style="display: inline;width: 30%" type="text" ng-model="sub.subcategory" ng-change="activateSave()">
-                <label>Add Sub Category</label>
-            </div>
+        <div class="col l6">
+
+            <table>
+                <thead>
+                <tr>
+                    <th>Categories</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="m in loadMe">
+                 <td>
+                    {{m.category}}
+                 </td>
+                    <td>
+                        <button ng-click="removeDCat(m)" class="btn">Remove</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <a class="btn purple" ng-click="categories.push({'category':''})"><i class="material-icons">subject</i></a>
-
-    <a class="btn blue" ng-click="saveScope()" ng-show="saveState"><i class="material-icons">send</i></a>
 </div>   
 </div>
 
