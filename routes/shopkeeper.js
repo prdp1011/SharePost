@@ -95,7 +95,15 @@ router.post('/getSubCat',function (req,res) {
 
 
 
-
+router.post('/delProduct',function (req,res) {
+    Product.remove({_id:req.body.id},function (err,result) {
+        if(err){
+            app.sendError(req,res,"product error in deleting",err)
+            }else{
+            app.send(req,res,result)
+        }
+    })
+})
 
 
 

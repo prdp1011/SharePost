@@ -28,6 +28,8 @@ router.get('/login', function (req, res) {
                 phoneNumber: result.phoneNumber,
                 id:result._id,
                 role:result.role,
+                pic:result.pic,
+                backPic:result.backPic,
                 approved:result.approved
             };
             console.log({isError: false, data: profile})

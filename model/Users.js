@@ -27,6 +27,8 @@ var userSchema = new Schema({
     password: { type: String, required: true },
     role: String,
     approved: {type:'number',default:0},
+    pic:String,
+    backPic:String,
     lat: String,
     long: String,
     createdAt: Date,

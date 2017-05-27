@@ -7,10 +7,15 @@ var app = angular.module('ofBuzz', [
     'ngAnimate',
     'vsGoogleAutocomplete',
     'ngFileUpload',
-    'nvd3'
+    'nvd3',
+    'angular-loading-bar',
+    'treasure-overlay-spinner'
+
 ]);
 
-
+// app.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+//     cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
+// }]);
 
 
 app.config([
@@ -101,7 +106,10 @@ blacklist.forEach(function(route) {
     templateUrl: 'views/pages/uploadProduct.html'
 }).when('/phoneNumber', {
     templateUrl: 'views/pages/impNumber.html'
-}).when('/profile', {
+}).when('/donationNumber', {
+    templateUrl: 'views/pages/donNumber.html'
+})
+     .when('/profile', {
     templateUrl: 'views/pages/profile.html'
 }).when('/404', {
     templateUrl: 'views/pages/404.html'
@@ -137,6 +145,16 @@ app.directive('nxEqual', function() {
 
 app.run(['$rootScope','$http','authSvc',function ($rootScope,$http,authSvc) {
 
+    $rootScope.spinner = {
+        active: false,
+        on: function () {
+            this.active = true;
+        },
+        off: function () {
+            this.active = false;
+        }
+    };
+
 
     $rootScope.isButtonActive=false
 
@@ -159,3 +177,5 @@ app.run(['$rootScope','$http','authSvc',function ($rootScope,$http,authSvc) {
 
     }
 }])
+
+

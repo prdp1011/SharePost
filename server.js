@@ -30,6 +30,8 @@ Admin = require('./model/Users');
 Product = require('./model/products');
 DiaryCategories = require('./model/diaryCategories');
 Otp = require('./model/Otp');
+Donation = require('./model/donation');
+DonationCat = require('./model/donationCategory');
 Category = require('./model/categories');
 Phonediary = require('./model/phonediary');
 
@@ -89,7 +91,15 @@ app.use(methodOverride());
 //         var datetimestamp = Date.now();
 //         cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
 //     }
-// });
+// })
+//
+//
+//
+//
+//
+//
+//
+// \0;
 
 var storage =   multer.diskStorage({
     destination: function (req, file, callback) {
@@ -109,6 +119,111 @@ var upload = multer({ storage : storage }).array('files');
 //});
 
 
+app.post('/uploadPic', function(req, res) {
+    console.log("calling upload")
+    upload(req,res,function(err) {
+        console.log("data",req.body);
+        // console.log(req.files);
+        if(err) {
+            console.log(err);
+        }else{
+            Admin.findOne({_id:req.body.userId},function (err,result) {
+
+                if(result){
+                    var imgpath=[];
+                    async.each(req.files,function (m,callback) {
+
+                        cloudinary.uploader.upload(m.path, function(result) {
+                            // console.log(result)
+                            imgpath.push(result.url);
+                            callback()
+                        })
+
+                    },function(done){
+
+
+                        console.log("image oath",imgpath)
+                        Admin.findOne({userId:req.body.userId},{},{sort:{productId:-1}},function (err,w) {
+                            if (err) console.log(err)
+                            var productId = w ? w.productId + 1 : 1
+                            console.log(imgpath)
+                            Admin.update({
+                                _id: req.body.userId,
+                            },{$set:{pic:imgpath[0]}}, function (err, s) {
+                                if (err) console.log(err)
+                                del(['uploads/*.jpeg','uploads/*.jpg', 'uploads/*.png', '!uploads/*.txt']).then(function(paths) {
+                                    console.log('Deleted files and folders:\n', paths.join('\n'));
+                                    app.send(req, res, s)
+                                    console.log("database uploaded")
+                                });
+
+                            })
+
+                        })
+                    })
+                }else{
+
+                    app.sendError(req,res,"no id found",err)
+                }
+            });
+
+        }
+
+    })
+
+
+});
+app.post('/uploadBackPic', function(req, res) {
+    console.log("calling upload")
+    upload(req,res,function(err) {
+        console.log("data",req.body);
+        // console.log(req.files);
+        if(err) {
+            console.log(err);
+        }else{
+            Admin.findOne({_id:req.body.userId},function (err,result) {
+
+                if(result){
+                    var imgpath=[];
+                    async.each(req.files,function (m,callback) {
+
+                        cloudinary.uploader.upload(m.path, function(result) {
+                            // console.log(result)
+                            imgpath.push(result.url);
+                            callback()
+                        })
+
+                    },function(done){
+
+                        Admin.findOne({_id:req.body.userId},{},{sort:{productId:-1}},function (err,w) {
+                            if (err) console.log(err)
+                            console.log(imgpath[0])
+                            Admin.update({
+                                _id: req.body.userId,
+                            },{$set:{backPic:imgpath[0]}}, function (err, s) {
+                                if (err) console.log(err)
+                                del(['uploads/*.jpeg','uploads/*.jpg', 'uploads/*.png', '!uploads/*.txt']).then(function(paths) {
+                                    console.log('Deleted files and folders:\n', paths.join('\n'));
+                                    app.send(req, res, s)
+                                    console.log("database uploaded")
+                                });
+
+                            })
+
+                        })
+                    })
+                }else{
+
+                    app.sendError(req,res,"no id found",err)
+                }
+            });
+
+        }
+
+    })
+
+
+});
 app.post('/upload', function(req, res) {
     //console.log(req.body);
     upload(req,res,function(err) {

@@ -15,6 +15,9 @@
         <link href="lib/font-awesome/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="lib/materialize/dist/css/materialize.min.css">
         <link rel="stylesheet" href="lib/nvd3/build/nv.d3.css">
+        <link rel="stylesheet" href="lib/angular-treasure-overlay-spinner/src/treasure-overlay-spinner.css">
+        <link rel='stylesheet' href='lib/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
+
 
         <link rel="stylesheet" href="styles/main.css">
 
@@ -31,16 +34,18 @@
         <script type="text/javascript" src="lib/d3/d3.min.js"></script>
         <script type="text/javascript" src="lib/nvd3/build/nv.d3.min.js"></script>
         <script type="text/javascript" src="lib/angular-nvd3/dist/angular-nvd3.min.js"></script>
+        <script type='text/javascript' src='lib/angular-loading-bar/build/loading-bar.min.js'></script>
+        <script type='text/javascript' src='lib/angular-treasure-overlay-spinner/src/treasure-overlay-spinner.js'></script>
         <script type="text/javascript" src="scripts/app.js"></script>
         <script type="text/javascript" src="scripts/apis.js"></script>
         <script type="text/javascript" src="scripts/main.js"></script>
+        <script type="text/javascript" src="scripts/controllers/donationCtrl.js"></script>
         <script type="text/javascript" src="scripts/controllers/adminController.js"></script>
 
         <!--======================================================================================   -->
     </head>
 <body ng-app="ofBuzz" style="background-color:white ">
-
-<nav class="nav-extended">
+<nav class="nav-extended" style="height: 250px">
     <div class="nav-background">
         <div class="ea k" style="background-image: url('//cdn.shopify.com/s/files/1/1775/8583/t/1/assets/icon-seamless.png?12295265317662713736');"></div>
     </div>
@@ -68,21 +73,25 @@
         <li class="collection-item" ng-if="role==2&&approved==1"><a href="#/uploadPro"><i class="fa fa-user-circle" aria-hidden="true"></i>Product Upload</a></li>
         <li class="collection-item" ng-if="role==1"><a href="#/pages/admin"><i class="fa fa-user-circle" aria-hidden="true"></i>Admin Dashboard</a></li>
         <li class="collection-item" ng-if="role==2"><a href="#/profile"><i class="fa fa-user-circle" aria-hidden="true"></i>Profile</a></li>
-        <li ng-if="!signFlag"><a href="#/signIn">Sign In</a></li>
 
     </ul>
     </li>
     <li><a href="#/phoneNumber"><i class="fa fa-phone-square" aria-hidden="true"></i>
         Important Numbers</a></li>
+    <li><a href="#/donationNumber"><i class="fa fa-phone-square" aria-hidden="true"></i>
+        Blood Donation Numbers</a></li>
+    <li ng-if="!signFlag"><a href="#/signIn">Sign In</a></li>
+
     <div style="display: inline" ng-controller="logoutCtrl">
         <li ng-if="signFlag"><a ng-click="logout()">Sign Out</a></li>
     </div>
 
 </ul>
 
+<treasure-overlay-spinner active='spinner.active'>
+    <div  ng-view="" class=fade></div>
+</treasure-overlay-spinner>
 
-
-<div ng-view=""></div>
 
 </body>
 </html>

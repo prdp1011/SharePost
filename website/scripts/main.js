@@ -20,7 +20,9 @@ app.factory('authSvc', function ($http, $q, $window, apisrv, $rootScope) {
             phoneNumber: data.phoneNumber,
             id: data.id,
             role: data.role,
-            approved:data.approved
+            approved:data.approved,
+            pic:data.pic,
+            backPic:data.backPic
         };
 
         $window.localStorage[storage_key] = JSON.stringify(self.userinfo);
@@ -133,8 +135,6 @@ app.controller('loginCtrl', [
                     }
                 })
         }
-
-
 
         // $scope.selected=$scope.cats[0]
         $scope.submit = function () {
@@ -392,8 +392,28 @@ app.controller('eprofileCtrl', ['$scope', '$rootScope', '$http', '$window', '$lo
 
         })
 
+
+
+
        $scope.deleteCard =function(p){
-            console.log(p)
+           $http.post('/shopkeeper/delProduct',{id:p.id})
+               .then(function (response) {
+
+                   if(response.data.isError){
+                       alert(response.data.msg)
+                   }else{
+
+
+                       $http.post('/shopkeeper/getProduct', {userId: $routeParams.id})
+                           .then(function (response) {
+                               console.log(response.data.data)
+                               $scope.profileProduct = response.data.data
+
+
+                           })
+                   }
+
+               })
 
 
 
@@ -426,7 +446,58 @@ app.controller('eprofileCtrl', ['$scope', '$rootScope', '$http', '$window', '$lo
 
 
 }]);
-app.controller('profileCtrl', ['$scope', '$rootScope', '$http', '$window', '$location', 'Upload', '$timeout', 'apisrv', 'authSvc', function ($scope, $rootScope, $http, $window, $location, Upload, $timeout, apisrv, authSvc) {
+app.controller('profileCtrl', ['$scope', '$rootScope', '$http', '$window', '$location', 'Upload', '$timeout', 'apisrv', 'authSvc','$routeParams', function ($scope, $rootScope, $http, $window, $location, Upload, $timeout, apisrv, authSvc,$routeParams) {
+
+
+
+    $scope.pic=authSvc.getUserInfo().pic
+    $scope.backPic=authSvc.getUserInfo().backPic
+
+    $scope.uploadFiles = function (a,b) {
+        console.log("running");
+        $scope.upload(a);
+    };
+    $scope.upload = function (files) {
+        console.log("called");
+        $scope.data = {
+            userId: authSvc.getUserInfo().id,
+            files: files
+        };
+        Upload.upload({
+            url: "/uploadPic",
+            arrayKey: '',
+            data: $scope.data
+        }).then(function (response) {
+            console.log(response);
+            alert("data uploaded");
+        });
+    };
+
+
+    $scope.uploadFiles2 = function (a,b) {
+        console.log("running");
+        $scope.upload2(a);
+
+    };
+    $scope.upload2 = function (files) {
+        console.log("called");
+        $scope.data2 = {
+            userId: authSvc.getUserInfo().id,
+            files: files
+        };
+        Upload.upload({
+            url: "/uploadBackPic",
+            arrayKey: '',
+            data: $scope.data2
+        }).then(function (response) {
+            console.log(response);
+            alert("data uploaded");
+        });
+    };
+
+
+
+
 
     $scope.shop = authSvc.getUserInfo()
     $http.post('/shopkeeper/getProduct', {userId: authSvc.getUserInfo().id})
@@ -437,6 +508,31 @@ app.controller('profileCtrl', ['$scope', '$rootScope', '$http', '$window', '$loc
                
 
         })
+
+
+    $scope.deleteCard =function(p){
+
+        console.log(p)
+        $http.post('/shopkeeper/delProduct',{id:p.id})
+            .then(function (response) {
+
+                if(response.data.isError){
+                    alert(response.data.msg)
+                }else{
+                    $http.post('/shopkeeper/getProduct', {userId: authSvc.getUserInfo().id})
+                        .then(function (response) {
+                            console.log(response.data.data)
+                            $scope.profileProduct = response.data.data
+
+
+                        })
+                }
+
+            })
+
+
+
+    }
 
 
     $scope.removePhoto = function (url, pId) {
@@ -484,40 +580,6 @@ app.controller('profileCtrl', ['$scope', '$rootScope', '$http', '$window', '$loc
     
 
 
- $scope.uploadFiles = function(arg, file, errFiles) {
-        $scope.datatoBeSendProfile = {
-            'file' : file,
-            'type':arg.type,
-            'id' : arg.id
-        };
-
-        console.log( $scope.datatoBeSendProfile);
-        $scope.errFile = errFiles && errFiles[0];
-        if (file) {
-            file.upload = Upload.upload({
-                url: '/upload',
-                arrayKey: '',
-                data:  $scope.datatoBeSendProfile
-            });
-
-            file.upload.then(function (response) {
-                $timeout(function () {
-                    file.result = response.data;
-                    console.log(file.result)
-                });
-            }, function (response) {
-
-                console.log(response)
-                if (response.status > 0)
-                    $scope.errorMsg = response.status + ': ' + response.data;
-            }, function (evt) {
-                file.progress = Math.min(100, parseInt(100.0 * 
-                                         evt.loaded / evt.total));
-            });
-        }
-
-        console.log(file)   
-    }
 
 
 
