@@ -253,9 +253,9 @@ router.post('/getDcat',function (req,res) {
 
 
 
-router.post('/removeCat',function (req,res) {
+router.post('/editCat',function (req,res) {
 
-    Category.remove({_id:req.body.id},function (err,result) {
+    Category.update({_id:req.body.id},{$set:{name:req.body.newCat}},function (err,result) {
         if(err){
             app.sendError(req,res,"error in deletion",err)
         }else{

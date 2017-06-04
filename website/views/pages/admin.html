@@ -145,6 +145,10 @@
                 <button type="button" class="btn" ng-click="addCat()">Add</button>
                 <br>
                 <br>
+                <div input-field="">
+                    <input type="text" id="in" ng-model="e.newCat">
+                    <label for="in">Edit</label>
+                </div>
                 <div>
                     <table class="table">
                         <thead>
@@ -156,7 +160,7 @@
                         <tbody>
                         <tr ng-repeat="l in getData.select ">
                             <td>{{l.name}}</td>
-                            <td><button class="btn" ng-click="removeCat(l)" >Remove</button>
+                            <td><button class="btn" ng-click="editCat(l)" >Edit</button>
                             </td>
                         </tr>
                         </tbody>

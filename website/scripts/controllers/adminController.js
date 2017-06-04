@@ -8,6 +8,7 @@ app.controller('adminCtrl', ['$scope', '$rootScope', '$http', '$window', '$locat
     $scope.newList = []
     $scope.dataM = {};
     $scope.edit = {};
+    $scope.e={}
     $scope.edit.listText = ''
     $scope.edit.value = ''
     $scope.showList = [];
@@ -108,11 +109,9 @@ app.controller('adminCtrl', ['$scope', '$rootScope', '$http', '$window', '$locat
 
     }
 
-
-    $scope.removeCat=function (p) {
-
-        console.log(p)
-        $http.post('/admin/removeCat',{id:p._id})
+    $scope.editCat=function (p) {
+        console.log($scope.e.newCat)
+        $http.post('/admin/editCat',{id:p._id,newCat:$scope.e.newCat})
             .then(function (response) {
                 if(response.data.isError){
                     Materialize.toast('error in deletion',4000)
@@ -122,7 +121,7 @@ app.controller('adminCtrl', ['$scope', '$rootScope', '$http', '$window', '$locat
                             if (!response.data.isError) {
                                 console.log("mera data", response.data.data)
                                 $scope.getData.select = response.data.data
-                                Materialize.toast('Category Deleted',4000)
+                                Materialize.toast('Category Edited',4000)
 
                             }
 
