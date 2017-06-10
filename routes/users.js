@@ -8,6 +8,20 @@ var _ = require('lodash');
 var router = express.Router();
 var async=require('async')
 
+
+
+router.get('/getImages',function (req,res) {
+    Admin.findOne({_id:req.query.userId},{pic:1,backPic:1},function (err,response) {
+        if(err){
+            app.sendError(req,res,"image not found",err)
+        }else{
+            app.send(req,res,response)
+        }
+
+
+    })
+
+})
 router.get('/login', function (req, res) {
     console.log(req.query);
    Admin.findOne({phoneNumber:req.query.username}).exec(function(err,result){
@@ -22,7 +36,7 @@ router.get('/login', function (req, res) {
             }
             var profile = {
                 firstName: result.firstName,
-                lasttName: result.lastName,
+                lastName: result.lastName,
                 emailId: result.emailId,
                 address:result.address1,
                 phoneNumber: result.phoneNumber,
