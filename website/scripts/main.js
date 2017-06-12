@@ -109,8 +109,8 @@ app.controller('loginCtrl', [
             });
         };
     }
-]).controller('uploadPro', [
-    '$scope', 'authSvc', 'Upload', '$window', 'apisrv', '$timeout','$http', function ($scope, authSvc, Upload, $window, apisrv, $timeout,$http) {
+])
+    .controller('uploadPro', [    '$scope', 'authSvc', 'Upload', '$window', 'apisrv', '$timeout','$http', function ($scope, authSvc, Upload, $window, apisrv, $timeout,$http) {
         $scope.selected = ''
         $scope.dats={}
 
@@ -174,7 +174,8 @@ app.controller('loginCtrl', [
             });
         };
     }
-]).controller('AppCtrl', [
+])
+    .controller('AppCtrl', [
     '$scope', '$rootScope', '$route', '$document', 'authSvc', function ($scope, $rootScope, $route, $document, authSvc) {
         var $window;
         $window = $(window);
@@ -431,7 +432,7 @@ app.controller('eprofileCtrl', ['$scope', '$rootScope', '$http', '$window', '$lo
                             console.log(response.data.data)
                             $scope.profileProduct = response.data.data
 
-                            
+
 
                         })
 
@@ -505,7 +506,7 @@ app.controller('profileCtrl', ['$scope', '$rootScope', '$http', '$window', '$loc
             console.log(response.data.data)
             $scope.profileProduct = response.data.data
 
-               
+
 
         })
 
@@ -558,10 +559,10 @@ app.controller('profileCtrl', ['$scope', '$rootScope', '$http', '$window', '$loc
     }
         var datatoBeSend = {};
     $scope.picChangeBackground=function(arg1,file, errFiles){
-       
+
         var datatoBeSend = {
             'id': arg1.id,
-            type: 0 
+            type: 0
         }
              console.log(datatoBeSend)
              console.log($scope.bgImageUrl)
@@ -577,7 +578,7 @@ app.controller('profileCtrl', ['$scope', '$rootScope', '$http', '$window', '$loc
              $scope.uploadFiles(datatoBeSendProfile, file, errFiles)
 
     }
-    
+
 
 
 
